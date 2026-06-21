@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanya Asisten - SSC Smart Internship</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --telkom-red: #CC0000;
+            --telkom-dark-red: #8b0000;
+            --cream-white: #FDFDFD;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --text-main: #2C3E50;
+            --chat-bg: #f4f7f6;
+        }
+
+        body {
+            background-color: var(--cream-white);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Navigasi Premium */
+        .navbar-custom {
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+        }
+
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: var(--telkom-red) !important;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: var(--telkom-dark-red) !important;
+            transform: translateY(-2px);
+        }
+
+        /* Chat Container Modern */
+        .chat-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: radial-gradient(circle at center, var(--cream-white) 0%, #eef2f5 100%);
+        }
+
+        .chat-card {
+            width: 100%;
+            max-width: 1000px;
+            height: 100%;
+            max-height: 85vh;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* ===== BATIK DI HEADER ===== */
+        .chat-header {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M20 20c0-11.046 8.954-20 20-20v20H20zM0 20c11.046 0 20-8.954 20-20v20H0zM0 40c0-11.046 8.954-20 20-20v20H0zM20 40c11.046 0 20-8.954 20-20v20H20z' fill='%23ffffff' fill-opacity='0.12' fill-rule='evenodd'/%3E%3C/svg%3E"), linear-gradient(135deg, var(--telkom-red) 0%, var(--telkom-dark-red) 100%);
+            background-size: 40px 40px, auto;
+            padding: 20px 30px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            z-index: 2;
+        }
+
+        .ai-avatar-header {
+            width: 50px;
+            height: 50px;
+            background: white;
+            color: var(--telkom-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Ruang Obrolan */
+        .chat-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px;
+            background-color: var(--chat-bg);
+            scroll-behavior: smooth;
+        }
+
+        .msg-row {
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 25px;
+            gap: 12px;
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        .msg-row.user {
+            flex-direction: row-reverse;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .avatar-sm {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .avatar-bot {
+            background-color: var(--telkom-red);
+            color: white;
+        }
+
+        .avatar-user {
+            background-color: #2C3E50;
+            color: white;
+        }
+
+        /* Gelembung Obrolan */
+        .msg-bubble {
+            max-width: 75%;
+            padding: 15px 22px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+            position: relative;
+        }
+
+        .msg-row.bot .msg-bubble {
+            background: white;
+            color: var(--text-main);
+            border-bottom-left-radius: 4px;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        /* ===== BATIK DI CHAT USER ===== */
+        .msg-row.user .msg-bubble {
+            color: white;
+            border-bottom-right-radius: 4px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M20 20c0-11.046 8.954-20 20-20v20H20zM0 20c11.046 0 20-8.954 20-20v20H0zM0 40c0-11.046 8.954-20 20-20v20H0zM20 40c11.046 0 20-8.954 20-20v20H20z' fill='%23ffffff' fill-opacity='0.08' fill-rule='evenodd'/%3E%3C/svg%3E"), linear-gradient(135deg, #CC0000 0%, #8b0000 100%);
+            background-size: 30px 30px, auto;
+        }
+
+        /* Area Input Ketik */
+        .chat-footer {
+            padding: 20px 30px;
+            background: white;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            z-index: 2;
+        }
+
+        .input-group-custom {
+            background: #f8f9fa;
+            border-radius: 50px;
+            padding: 5px 5px 5px 25px;
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .input-group-custom:focus-within {
+            box-shadow: 0 0 0 4px rgba(204, 0, 0, 0.1);
+            border-color: rgba(204, 0, 0, 0.3);
+            background: white;
+        }
+
+        .input-group-custom input {
+            border: none;
+            background: transparent;
+            box-shadow: none !important;
+            padding: 12px 0;
+            font-size: 1rem;
+        }
+
+        /* ===== BATIK DI TOMBOL KIRIM ===== */
+        .btn-send {
+            color: white;
+            border-radius: 50px !important;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            transition: transform 0.2s ease;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M20 20c0-11.046 8.954-20 20-20v20H20zM0 20c11.046 0 20-8.954 20-20v20H0zM0 40c0-11.046 8.954-20 20-20v20H0zM20 40c11.046 0 20-8.954 20-20v20H20z' fill='%23ffffff' fill-opacity='0.08' fill-rule='evenodd'/%3E%3C/svg%3E"), linear-gradient(135deg, #CC0000 0%, #8b0000 100%);
+            background-size: 30px 30px, auto;
+        }
+
+        .btn-send:hover {
+            transform: scale(1.05);
+            filter: brightness(0.9);
+        }
+
+        /* Animasi Mengetik */
+        .typing-indicator {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            padding: 5px 10px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #a9a9a9;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); opacity: 0.5;}
+            40% { transform: scale(1); opacity: 1;}
+        }
+
+        /* Floating WA */
+        .fab-wa {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        .fab-wa:hover {
+            transform: scale(1.1) rotate(-5deg);
+            color: white;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+        }
+        
+        .fab-wa::before {
+            content: 'Bantuan Manusia';
+            position: absolute;
+            right: 75px;
+            background: white;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            white-space: nowrap;
+        }
+        
+        .fab-wa:hover::before {
+            opacity: 1;
+        }
+
+        .chat-body::-webkit-scrollbar { width: 6px; }
+        .chat-body::-webkit-scrollbar-track { background: transparent; }
+        .chat-body::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+        .chat-body::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="/"><i class="fa-solid fa-graduation-cap me-2"></i>SSC Smart Internship</a>
+            <button class="navbar-collapse collapse navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars text-danger"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item"><a class="nav-link px-3" href="/">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link active px-3" href="/chat">Tanya Asisten</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-sm btn-outline-danger rounded-pill px-4 shadow-sm" href="/workspace">
+                            <i class="fa-solid fa-lock me-1"></i> Workspace
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="chat-wrapper">
+        <div class="chat-card">
+            
+            <div class="chat-header">
+                <div class="ai-avatar-header">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div>
+                    <h5 class="mb-0 fw-bold">Asisten Virtual SSC</h5>
+                    <small class="opacity-75"><i class="fa-solid fa-circle text-success me-1" style="font-size: 8px;"></i>Online | Siap Membantu</small>
+                </div>
+            </div>
+
+            <div class="chat-body" id="chatBox">
+                <div class="msg-row bot">
+                    <div class="avatar-sm avatar-bot"><i class="fa-solid fa-robot"></i></div>
+                    <div class="msg-bubble">
+                        Halo Rek! Selamat datang di <strong>SSC Smart Internship</strong> Telkom University Surabaya. Ada yang bisa saya bantu terkait pelaksanaan atau aturan Kerja Praktik hari ini?
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-footer">
+                <div class="input-group-custom">
+                    <input type="text" id="userInput" class="form-control" placeholder="Tanyakan seputar kerja praktik..." onkeypress="handleKeyPress(event)" autocomplete="off">
+                    <button class="btn-send" type="button" id="sendBtn" onclick="sendMessage()">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <a href="https://wa.me/6281234567890" target="_blank" class="fab-wa">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        async function sendMessage() {
+            const inputField = document.getElementById('userInput');
+            const chatBox = document.getElementById('chatBox');
+            const sendButton = document.getElementById('sendBtn');
+            const messageText = inputField.value.trim();
+
+            if (!messageText) return;
+
+            const userMsgHtml = `
+                <div class="msg-row user">
+                    <div class="avatar-sm avatar-user"><i class="fa-solid fa-user"></i></div>
+                    <div class="msg-bubble">${messageText}</div>
+                </div>`;
+            chatBox.innerHTML += userMsgHtml;
+            inputField.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            const loadingId = 'loading-' + Date.now();
+            const loadingHtml = `
+                <div class="msg-row bot" id="${loadingId}">
+                    <div class="avatar-sm avatar-bot"><i class="fa-solid fa-robot"></i></div>
+                    <div class="msg-bubble">
+                        <div class="typing-indicator">
+                            <span class="text-muted small fw-semibold me-2">Mengetik</span>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                    </div>
+                </div>`;
+            chatBox.innerHTML += loadingHtml;
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            inputField.disabled = true;
+            sendButton.disabled = true;
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: messageText })
+                });
+
+                const data = await response.json();
+                document.getElementById(loadingId).remove();
+
+                if (response.ok) {
+                    const formattedResponse = data.response.replace(/\n/g, '<br>');
+                    const botMsgHtml = `
+                        <div class="msg-row bot">
+                            <div class="avatar-sm avatar-bot"><i class="fa-solid fa-robot"></i></div>
+                            <div class="msg-bubble">${formattedResponse}</div>
+                        </div>`;
+                    chatBox.innerHTML += botMsgHtml;
+                } else {
+                    const errorMsgHtml = `
+                        <div class="msg-row bot">
+                            <div class="avatar-sm avatar-bot"><i class="fa-solid fa-robot"></i></div>
+                            <div class="msg-bubble text-danger"><strong>Sistem Eror:</strong> ${data.error || 'Gagal memproses pesan.'}</div>
+                        </div>`;
+                    chatBox.innerHTML += errorMsgHtml;
+                }
+            } catch (error) {
+                document.getElementById(loadingId).remove();
+                const errorNetworkHtml = `
+                    <div class="msg-row bot">
+                        <div class="avatar-sm avatar-bot"><i class="fa-solid fa-robot"></i></div>
+                        <div class="msg-bubble text-danger">Maaf, terjadi kesalahan koneksi jaringan. Silakan coba lagi.</div>
+                    </div>`;
+                chatBox.innerHTML += errorNetworkHtml;
+            }
+
+            inputField.disabled = false;
+            sendButton.disabled = false;
+            inputField.focus();
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+
+</html>

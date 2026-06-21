@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workspace Admin - SSC Smart Internship</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <style>
+        :root {
+            --telkom-red: #CC0000;
+            --telkom-dark-red: #8b0000;
+            --cream-white: #FDFDFD;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --text-main: #2C3E50;
+            --bg-workspace: #f4f7f6;
+        }
+
+        body {
+            background-color: var(--bg-workspace);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== NAVIGASI PREMIUM SERAGAM ===== */
+        .navbar-custom {
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+        }
+
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: var(--telkom-red) !important;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: var(--telkom-dark-red) !important;
+            transform: translateY(-2px);
+        }
+
+        /* ===== KARTU WORKSPACE PREMIUM ===== */
+        .workspace-header {
+            padding: 40px 0 20px;
+            text-align: center;
+            animation: fadeInDown 0.5s ease;
+        }
+
+        .card-custom {
+            background: white;
+            border: none;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03), 0 1px 8px rgba(0, 0, 0, 0.02);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+        }
+
+        .card-custom:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(204, 0, 0, 0.06);
+        }
+
+        /* ===== TOMBOL 3D MERAH ===== */
+        .btn-telkom {
+            background: linear-gradient(135deg, var(--telkom-red) 0%, var(--telkom-dark-red) 100%);
+            color: white;
+            font-weight: bold;
+            border-radius: 50px;
+            padding: 12px 30px;
+            border: none;
+            box-shadow: 0 6px 0px rgba(139, 0, 0, 0.8), 0 15px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .btn-telkom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0px rgba(139, 0, 0, 0.9), 0 20px 25px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+
+        .btn-telkom:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0px rgba(139, 0, 0, 0.4), 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form Upload Interaktif */
+        .form-control[type="file"] {
+            border: 2px dashed rgba(204, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 15px;
+            background-color: rgba(204, 0, 0, 0.02);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-control[type="file"]:hover,
+        .form-control[type="file"]:focus {
+            border-color: var(--telkom-red);
+            background-color: rgba(204, 0, 0, 0.05);
+            box-shadow: none;
+        }
+
+        /* ===== LIST DATASET ===== */
+        .dataset-container {
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            background: #ffffff;
+            overflow: hidden;
+        }
+
+        .file-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 25px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            transition: background 0.2s ease;
+        }
+
+        .file-list-item:hover {
+            background-color: rgba(204, 0, 0, 0.02);
+        }
+
+        .file-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .btn-delete {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background-color: rgba(204, 0, 0, 0.05);
+            color: var(--telkom-red);
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-delete:hover {
+            background-color: var(--telkom-red);
+            color: white;
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Icon styling */
+        .icon-header {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(204, 0, 0, 0.1);
+            color: var(--telkom-red);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/"><i class="fa-solid fa-graduation-cap me-2"></i>SSC Smart Internship</a>
+            <button class="navbar-collapse collapse navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars text-danger"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item"><a class="nav-link px-3" href="/">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="/chat">Tanya Asisten</a></li>
+                    <li class="nav-item ms-lg-2">
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container workspace-header">
+        <h2 class="fw-bold text-dark"><i class="fa-solid fa-server me-2 text-danger"></i>Dataset Workspace</h2>
+        <p class="text-muted">Kelola dokumen pedoman (PDF) yang menjadi basis pengetahuan mandiri dari AI Chatbot SSC.
+        </p>
+    </div>
+
+    <div class="container mb-5">
+        <div class="row g-4 justify-content-center">
+
+            <div class="col-lg-5">
+                <div class="card-custom">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="icon-header mb-0 me-3"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                        <h5 class="fw-bold mb-0 text-dark">Upload Dataset Baru</h5>
+                    </div>
+
+                    <form action="/upload" method="POST" enctype="multipart/form-data">
+                        <div class="mb-4">
+                            <label for="formFile"
+                                class="form-label text-muted small fw-bold text-uppercase tracking-wide">Pilih File
+                                Pedoman (.pdf)</label>
+                            <input class="form-control" type="file" id="formFile" name="dataset_file" accept=".pdf"
+                                required>
+                            <small class="text-muted mt-2 d-block"><i class="fa-solid fa-circle-info me-1"></i>Sistem
+                                akan otomatis memecah dan menanam teks ke dalam Vector Database.</small>
+                        </div>
+                        <button type="submit" class="btn-telkom w-100 mt-2">
+                            <i class="fa-solid fa-microchip me-2"></i>Injeksi ke Memori AI
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-7">
+                <div class="card-custom">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="icon-header mb-0 me-3"><i class="fa-solid fa-brain"></i></div>
+                        <h5 class="fw-bold mb-0 text-dark">Memori Pengetahuan Aktif</h5>
+                    </div>
+
+                    <div class="dataset-container shadow-sm">
+                        {% if files %}
+                        {% for file in files %}
+                        <div class="file-list-item">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-danger bg-opacity-10 p-2 rounded me-3 text-danger">
+                                    <i class="fa-solid fa-file-pdf fs-5"></i>
+                                </div>
+                                <div>
+                                    <span class="fw-bold text-dark d-block" style="font-size: 0.95rem;">{{ file
+                                        }}</span>
+                                    <span class="badge bg-success bg-opacity-10 text-success mt-1"><i
+                                            class="fa-solid fa-check-circle me-1"></i>Tersinkronisasi</span>
+                                </div>
+                            </div>
+                            <a href="/delete/{{ file }}" class="btn-delete" title="Hapus Dokumen">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </a>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="p-5 text-center text-muted">
+                            <div class="opacity-50 mb-3">
+                                <i class="fa-solid fa-folder-open" style="font-size: 3rem;"></i>
+                            </div>
+                            <h6 class="fw-bold text-dark">Gudang Memori Kosong</h6>
+                            <p class="small mb-0">Belum ada dokumen pedoman yang diunggah.</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+        const message = urlParams.get('message');
+
+        if (status === 'success') {
+            Swal.fire({
+                icon: 'success',
+                title: 'Sinkronisasi Berhasil!',
+                text: message,
+                confirmButtonColor: '#CC0000',
+                customClass: {
+                    popup: 'rounded-4'
+                }
+            }).then(() => {
+                window.history.replaceState({}, document.title, "/workspace");
+            });
+        } else if (status === 'error') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal Memproses',
+                text: message,
+                confirmButtonColor: '#CC0000',
+                customClass: {
+                    popup: 'rounded-4'
+                }
+            }).then(() => {
+                window.history.replaceState({}, document.title, "/workspace");
+            });
+        }
+    </script>
+</body>
+
+</html>

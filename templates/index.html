@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSC Smart Internship - Telkom University Surabaya</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --telkom-red: #CC0000;
+            --telkom-dark-red: #8b0000;
+            --telkom-deep: #4a0000;
+            --cream-white: #FDFDFD;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --text-main: #2C3E50;
+        }
+
+        body {
+            background-color: var(--cream-white);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* Navigasi Premium */
+        .navbar-custom {
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: var(--telkom-red) !important;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: var(--telkom-dark-red) !important;
+            transform: translateY(-2px);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero-wrapper {
+            position: relative;
+            background: linear-gradient(135deg, var(--telkom-deep) 0%, var(--telkom-red) 50%, var(--telkom-dark-red) 100%);
+            padding: 120px 0 100px;
+            border-bottom-left-radius: 60px;
+            border-bottom-right-radius: 60px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(204, 0, 0, 0.15);
+            z-index: 1;
+        }
+
+        .hero-motif {
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            right: -50px;
+            bottom: -50px;
+            opacity: 0.15;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M20 20c0-11.046 8.954-20 20-20v20H20zM0 20c11.046 0 20-8.954 20-20v20H0zM0 40c0-11.046 8.954-20 20-20v20H0zM20 40c11.046 0 20-8.954 20-20v20H20z' fill='%23ffffff' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background-size: 40px 40px;
+            z-index: -2;
+            transform: translateZ(0);
+            will-change: transform;
+            animation: panMotif 3s linear infinite;
+        }
+
+        @keyframes panMotif {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            100% {
+                transform: translate3d(-40px, -40px, 0);
+            }
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: -30%;
+            left: 10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 100, 100, 0.2);
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: pulseGlow 6s infinite alternate;
+            pointer-events: none;
+            z-index: -1;
+            transform: translateZ(0);
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .hero-glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 40px;
+            color: white;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-image-container {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            animation: floatImage 5s ease-in-out infinite alternate;
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        .hero-image-container::after {
+            content: '';
+            position: absolute;
+            inset: 5%;
+            background: rgba(255, 255, 255, 0.3);
+            filter: blur(30px);
+            z-index: -1;
+            border-radius: 24px;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: auto;
+            border-radius: 24px;
+            border: 4px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            object-fit: cover;
+        }
+
+        @keyframes floatImage {
+            0% {
+                transform: translateY(0px);
+            }
+
+            100% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .btn-3d {
+            background-color: white;
+            color: var(--telkom-red);
+            font-weight: bold;
+            border-radius: 50px;
+            padding: 12px 30px;
+            border: none;
+            box-shadow: 0 6px 0px rgba(255, 255, 255, 0.6), 0 15px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .btn-3d:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0px rgba(255, 255, 255, 0.8), 0 20px 25px rgba(0, 0, 0, 0.15);
+            background-color: #fdfdfd;
+        }
+
+        .btn-3d:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0px rgba(255, 255, 255, 0.4), 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ===== LAYANAN UNGGULAN CARDS ===== */
+        .feature-card {
+            background: white;
+            border: none;
+            border-radius: 20px;
+            padding: 30px;
+            height: 100%;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03), 0 1px 8px rgba(0, 0, 0, 0.02);
+            z-index: 2;
+            position: relative;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(204, 0, 0, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04);
+        }
+
+        .icon-wrapper {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(204, 0, 0, 0.1) 0%, rgba(204, 0, 0, 0.05) 100%);
+            color: var(--telkom-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 20px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .icon-wrapper {
+            background: var(--telkom-red);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        /* ===== PROMPT SUGGESTION CARDS ===== */
+        .prompt-card {
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        }
+
+        .prompt-card:hover {
+            border-color: var(--telkom-red);
+            background: rgba(204, 0, 0, 0.02);
+            transform: translateX(5px);
+        }
+
+        .prompt-icon {
+            background: rgba(204, 0, 0, 0.1);
+            color: var(--telkom-red);
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        /* ===== DIAGRAM & ALUR FOTO CARDS (NEW) ===== */
+        .diagram-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            /* Ditambahkan agar isi kartu sejajar rapi */
+            flex-direction: column;
+            /* Ditambahkan agar susunan tetap ke bawah */
+        }
+
+        .diagram-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(204, 0, 0, 0.1);
+        }
+
+        .diagram-card img {
+            border-radius: 12px;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            /* Kunci 1: Memaksa bingkai gambar memiliki ukuran seragam */
+            object-fit: contain;
+            /* Kunci 2: Gambar tidak akan gepeng dan tidak terpotong */
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            background-color: #ffffff;
+            /* Menyamarkan area kosong jika rasio gambar asli lebih kecil */
+            margin: auto 0;
+            /* Menempatkan gambar di tengah secara vertikal */
+        }
+
+        /* ===== LINK TERKAIT CARDS (NEW) ===== */
+        .link-card {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background: white;
+            border-radius: 16px;
+            text-decoration: none;
+            color: var(--text-main);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .link-card:hover {
+            background: linear-gradient(135deg, var(--telkom-red), var(--telkom-dark-red));
+            color: white !important;
+            transform: translateY(-5px);
+        }
+
+        .link-card:hover .link-icon {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .link-card:hover h6,
+        .link-card:hover small {
+            color: white !important;
+        }
+
+        .link-icon {
+            width: 55px;
+            height: 55px;
+            background: rgba(204, 0, 0, 0.08);
+            color: var(--telkom-red);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        /* ===== FAQ ACCORDION ===== */
+        .accordion-item {
+            border: none;
+            background: white;
+            border-radius: 15px !important;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+            overflow: hidden;
+        }
+
+        .accordion-button {
+            font-weight: 600;
+            color: var(--text-main);
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px !important;
+        }
+
+        .accordion-button:not(.collapsed) {
+            color: var(--telkom-red);
+            background-color: rgba(204, 0, 0, 0.03);
+            box-shadow: none;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: rgba(0, 0, 0, 0.125);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fa-solid fa-graduation-cap me-2"></i>SSC Smart Internship</a>
+            <button class="navbar-collapse collapse navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars text-danger"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item"><a class="nav-link active px-3" href="#">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#fitur">Layanan</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#diagram">Alur & Prosedur</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#links">Tautan</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#faq">FAQ</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-sm btn-outline-danger rounded-pill px-4 shadow-sm" href="/workspace">
+                            <i class="fa-solid fa-lock me-1"></i> Workspace
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-wrapper">
+        <div class="hero-motif"></div>
+        <div class="hero-glow"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="hero-glass-card">
+                        <span class="badge bg-light text-danger mb-3 px-3 py-2 rounded-pill shadow-sm">
+                            <i class="fa-solid fa-circle text-success me-1"
+                                style="font-size: 8px; vertical-align: middle;"></i> AI Assistant Aktif
+                        </span>
+                        <h1 class="display-5 fw-bold mb-3">Panduan Kerja Praktik Lebih Mudah & Cepat</h1>
+                        <p class="lead mb-4 opacity-75" style="font-size: 1.1rem;">Tidak perlu bingung mencari aturan di
+                            tumpukan dokumen. Tanyakan langsung syarat, prosedur, dan alur Kerja Praktik kepada Asisten
+                            Virtual cerdas kami kapan saja.</p>
+                        <a href="/chat" class="btn btn-3d"><i class="fa-solid fa-paper-plane me-2"></i>Mulai
+                            Konsultasi</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center mt-4 mt-lg-0">
+                    <div class="hero-image-container">
+                        <img src="{{ url_for('static', filename='images/mahasiswa-telkom.jpg') }}"
+                            alt="Ilustrasi Mahasiswa" class="hero-image img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="fitur" class="container my-5 pt-5">
+        <div class="text-center mb-5">
+            <h6 class="text-danger fw-bold text-uppercase tracking-wide">Layanan Unggulan</h6>
+            <h2 class="fw-bold text-dark">Mengapa Menggunakan SSC Smart?</h2>
+        </div>
+
+        <div class="row g-4 text-center">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="icon-wrapper"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                    <h5 class="fw-bold">Akses Real-Time 24/7</h5>
+                    <p class="text-muted small mt-3">Dapatkan informasi akademik langsung di tengah malam tanpa harus
+                        menunggu jam operasional loket kampus buka.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="icon-wrapper"><i class="fa-solid fa-bullseye"></i></div>
+                    <h5 class="fw-bold">Jawaban Sangat Akurat</h5>
+                    <p class="text-muted small mt-3">Seluruh respon asisten virtual merujuk langsung pada Buku Pedoman
+                        Kerja Praktik terbaru dan tervalidasi.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="icon-wrapper"><i class="fa-brands fa-whatsapp"></i></div>
+                    <h5 class="fw-bold">Terhubung ke Staf</h5>
+                    <p class="text-muted small mt-3">Jika asisten tidak memiliki jawaban, Anda akan diarahkan langsung
+                        ke WhatsApp resmi Unit Layanan Mahasiswa.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section id="diagram" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h6 class="text-danger fw-bold text-uppercase">Visualisasi</h6>
+                <h2 class="fw-bold text-dark">Alur & Prosedur Kerja Praktik</h2>
+                <p class="text-muted">Panduan langkah demi langkah dalam bentuk visual.</p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-6">
+                    <div class="diagram-card text-center">
+                        <h5 class="fw-bold mb-3"><i class="fa-solid fa-users-gear text-danger me-2"></i>Alur Mahasiswa
+                        </h5>
+                        <img src="{{ url_for('static', filename='images/foto-alur-mahasiswa.jpg') }}"
+                            alt="Diagram Alur Mahasiswa" class="img-fluid">
+                        <p class="text-muted small mt-3 mb-0">Diagram alur aktivitas mahasiswa selama masa persiapan
+                            hingga pelaksanaan Kerja Praktik.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="diagram-card text-center">
+                        <h5 class="fw-bold mb-3"><i class="fa-solid fa-file-signature text-danger me-2"></i>Prosedur
+                            Pengajuan</h5>
+                        <img src="{{ url_for('static', filename='images/foto-prosedur-pengajuan.jpg') }}"
+                            alt="Diagram Prosedur Pengajuan" class="img-fluid">
+                        <p class="text-muted small mt-3 mb-0">Tahapan administrasi dan prosedur pengajuan dokumen Kerja
+                            Praktik.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-white border-top border-bottom border-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-5 mb-lg-0">
+                    <h6 class="text-danger fw-bold text-uppercase tracking-wide">Kemampuan AI</h6>
+                    <h2 class="fw-bold text-dark mb-4">Apa saja yang bisa ditanyakan?</h2>
+                    <p class="text-muted mb-4">Sistem AI kami telah dilatih untuk menguasai seluruh isi pedoman. Anda
+                        bisa menanyakan berbagai macam topik dengan bahasa kasual sehari-hari.</p>
+                    <a href="/chat" class="btn btn-outline-danger rounded-pill px-4 py-2 fw-bold">Coba Sendiri Sekarang
+                        <i class="fa-solid fa-arrow-right ms-2"></i></a>
+                </div>
+                <div class="col-lg-7">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="prompt-card">
+                                <div class="prompt-icon"><i class="fa-solid fa-list-check"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Syarat & Ketentuan</h6>
+                                    <small class="text-muted">"Syarat daftar KP apa aja?"</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="prompt-card">
+                                <div class="prompt-icon"><i class="fa-solid fa-route"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Alur Pendaftaran</h6>
+                                    <small class="text-muted">"Gimana langkah-langkahnya?"</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="prompt-card">
+                                <div class="prompt-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Format Laporan</h6>
+                                    <small class="text-muted">"Aturan nulis laporannya gimana?"</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="prompt-card">
+                                <div class="prompt-icon"><i class="fa-solid fa-user-tie"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Dosen Pembimbing</h6>
+                                    <small class="text-muted">"Cara dapet dosen pembimbing?"</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="links" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h6 class="text-danger fw-bold text-uppercase">Akses Cepat</h6>
+                <h2 class="fw-bold text-dark">Tautan Terkait KP</h2>
+                <p class="text-muted">Kumpulan tautan formulir, aplikasi, dan panduan resmi Kerja Praktik.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <a href="https://linktr.ee/laa.upps.sby" target="_blank" class="link-card">
+                        <div class="link-icon"><i class="fa-solid fa-pen-to-square"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Form Pengajuan KP</h6>
+                            <small class="text-muted d-block">linktr.ee/laa.upps.sby</small>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <a href="https://toss.telkomuniversity.ac.id" target="_blank" class="link-card">
+                        <div class="link-icon"><i class="fa-solid fa-globe"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Portal TOSS</h6>
+                            <small class="text-muted d-block">Aplikasi Pengajuan TOSS</small>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <a href="https://tel-u.ac.id/tutorialmengajukanditoss" target="_blank" class="link-card">
+                        <div class="link-icon"><i class="fa-solid fa-laptop-file"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Tutorial TOSS</h6>
+                            <small class="text-muted d-block">Cara pengajuan surat pengantar</small>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <a href="https://tel-u.ac.id/panduankpsi" target="_blank" class="link-card">
+                        <div class="link-icon"><i class="fa-solid fa-book"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Buku Panduan KP</h6>
+                            <small class="text-muted d-block">Download panduan resmi</small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="text-center mb-5">
+                        <h6 class="text-danger fw-bold text-uppercase">Bantuan Cepat</h6>
+                        <h3 class="fw-bold">Pertanyaan Populer</h3>
+                    </div>
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header"><button class="accordion-button" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq1">Berapa minimal SKS untuk bisa
+                                    mengajukan Kerja Praktik?</button></h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-muted">Syarat minimal SKS merujuk pada pedoman angkatan.
+                                    Tanyakan pada asisten virtual kami untuk mendapatkan rincian syarat akademik secara
+                                    instan.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq2">Bagaimana alur pengajuan Proposal
+                                    KP?</button></h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-muted">Mulai dari persetujuan dosen wali hingga
+                                    pencetakan surat pengantar dari kampus, asisten virtual kami siap memandu Anda
+                                    langkah demi langkah.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq3">Apa format laporan akhir yang harus
+                                    dikumpulkan?</button></h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-muted">Format penulisan, batas margin, hingga lembar
+                                    pengesahan semuanya telah tertulis di pedoman. Asisten cerdas kami dapat
+                                    merangkumkannya untuk Anda secara instan.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white text-center py-4 border-top mt-auto">
+        <div class="container">
+            <p class="mb-0 text-muted small fw-semibold">&copy; 2026 SSC Smart Internship - Telkom University Surabaya.
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

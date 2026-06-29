@@ -4,386 +4,1765 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SSC Smart Internship - Telkom University Surabaya</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="description"
+        content="SSC Smart Assistant membantu mahasiswa Telkom University Surabaya memperoleh informasi Kerja Praktik dan Tugas Akhir melalui layanan Student Service Center.">
+    <title>SSC Smart Assistant | Student Service Center</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
+
         :root {
-            --telkom-red: #CC0000;
-            --telkom-dark-red: #8b0000;
-            --telkom-deep: #4a0000;
-            --cream-white: #FDFDFD;
-            --glass-bg: rgba(255, 255, 255, 0.85);
-            --glass-border: rgba(255, 255, 255, 0.3);
-            --text-main: #2C3E50;
+            --red: #d71920;
+            --red-dark: #9c0d16;
+            --wine: #50070d;
+            --ink: #172030;
+            --muted: #667388;
+            --soft: #f4f7fb;
+            --surface: #ffffff;
+            --line: rgba(23, 32, 48, .10);
+            --green: #1bb079;
+            --gold: #f6c46d;
+            --purple: #8450bd;
+            --shadow-lg: 0 26px 70px rgba(19, 26, 39, .14);
+            --shadow-md: 0 15px 40px rgba(19, 26, 39, .08);
+            --radius-xl: 34px;
+            --radius-lg: 26px;
+            --radius-md: 18px;
         }
 
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
         body {
-            background-color: var(--cream-white);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--text-main);
+            margin: 0;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 8% 8%, rgba(215, 25, 32, .035), transparent 26%),
+                linear-gradient(180deg, #f9fbfe 0%, #f3f6fb 100%);
+            font-family: "DM Sans", Arial, sans-serif;
             overflow-x: hidden;
         }
 
-        /* Navigasi Premium */
-        .navbar-custom {
-            background-color: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--glass-border);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 0;
+            font-family: "Outfit", Arial, sans-serif;
+            letter-spacing: -0.035em;
         }
 
-        .navbar-custom .navbar-brand,
-        .navbar-custom .nav-link {
-            color: var(--telkom-red) !important;
-            font-weight: 700;
-            transition: all 0.3s ease;
+        a { text-decoration: none; }
+
+        img {
+            display: block;
+            max-width: 100%;
         }
 
-        .navbar-custom .nav-link:hover {
-            color: var(--telkom-dark-red) !important;
-            transform: translateY(-2px);
+        .section-space { padding: 92px 0; }
+
+        .section-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 8px 13px;
+            border-radius: 999px;
+            color: var(--red);
+            background: rgba(215, 25, 32, .075);
+            font-size: .73rem;
+            font-weight: 800;
+            letter-spacing: .09em;
+            text-transform: uppercase;
         }
 
-        /* ===== HERO SECTION ===== */
-        .hero-wrapper {
-            position: relative;
-            background: linear-gradient(135deg, var(--telkom-deep) 0%, var(--telkom-red) 50%, var(--telkom-dark-red) 100%);
-            padding: 120px 0 100px;
-            border-bottom-left-radius: 60px;
-            border-bottom-right-radius: 60px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(204, 0, 0, 0.15);
-            z-index: 1;
-        }
-
-        .hero-motif {
-            position: absolute;
-            top: -50px;
-            left: -50px;
-            right: -50px;
-            bottom: -50px;
-            opacity: 0.15;
-            mix-blend-mode: overlay;
-            pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M20 20c0-11.046 8.954-20 20-20v20H20zM0 20c11.046 0 20-8.954 20-20v20H0zM0 40c0-11.046 8.954-20 20-20v20H0zM20 40c11.046 0 20-8.954 20-20v20H20z' fill='%23ffffff' fill-rule='evenodd'/%3E%3C/svg%3E");
-            background-size: 40px 40px;
-            z-index: -2;
-            transform: translateZ(0);
-            will-change: transform;
-            animation: panMotif 3s linear infinite;
-        }
-
-        @keyframes panMotif {
-            0% {
-                transform: translate3d(0, 0, 0);
-            }
-
-            100% {
-                transform: translate3d(-40px, -40px, 0);
-            }
-        }
-
-        .hero-glow {
-            position: absolute;
-            top: -30%;
-            left: 10%;
-            width: 400px;
-            height: 400px;
-            background: rgba(255, 100, 100, 0.2);
+        .section-kicker::before {
+            content: "";
+            width: 7px;
+            height: 7px;
             border-radius: 50%;
-            filter: blur(80px);
-            animation: pulseGlow 6s infinite alternate;
-            pointer-events: none;
-            z-index: -1;
-            transform: translateZ(0);
+            background: var(--red);
+            box-shadow: 0 0 0 5px rgba(215, 25, 32, .11);
         }
 
-        @keyframes pulseGlow {
-            0% {
-                transform: scale(1);
-                opacity: 0.5;
-            }
-
-            100% {
-                transform: scale(1.2);
-                opacity: 1;
-            }
+        .section-title {
+            max-width: 790px;
+            margin: 17px auto 13px;
+            color: var(--ink);
+            font-size: clamp(2.1rem, 4vw, 3.4rem);
+            font-weight: 800;
+            line-height: 1.08;
         }
 
-        .hero-glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 24px;
-            padding: 40px;
-            color: white;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .hero-image-container {
-            position: relative;
-            width: 100%;
-            max-width: 480px;
+        .section-copy {
+            max-width: 700px;
             margin: 0 auto;
-            animation: floatImage 5s ease-in-out infinite alternate;
-            transform: translateZ(0);
-            will-change: transform;
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.78;
         }
 
-        .hero-image-container::after {
-            content: '';
-            position: absolute;
-            inset: 5%;
-            background: rgba(255, 255, 255, 0.3);
-            filter: blur(30px);
-            z-index: -1;
-            border-radius: 24px;
+        /* NAVBAR */
+        .main-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1100;
+            min-height: 82px;
+            border-bottom: 1px solid rgba(23, 32, 48, .06);
+            background: rgba(255, 255, 255, .92);
+            box-shadow: 0 7px 24px rgba(23, 32, 48, .045);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
         }
 
-        .hero-image {
-            width: 100%;
-            height: auto;
-            border-radius: 24px;
-            border: 4px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            object-fit: cover;
+        .navbar { min-height: 82px; }
+
+        .navbar-brand {
+            color: var(--ink) !important;
+            font-family: "Outfit", sans-serif;
+            font-weight: 800;
         }
 
-        @keyframes floatImage {
-            0% {
-                transform: translateY(0px);
-            }
-
-            100% {
-                transform: translateY(-15px);
-            }
-        }
-
-        .btn-3d {
-            background-color: white;
-            color: var(--telkom-red);
-            font-weight: bold;
-            border-radius: 50px;
-            padding: 12px 30px;
-            border: none;
-            box-shadow: 0 6px 0px rgba(255, 255, 255, 0.6), 0 15px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.2s ease;
-        }
-
-        .btn-3d:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 0px rgba(255, 255, 255, 0.8), 0 20px 25px rgba(0, 0, 0, 0.15);
-            background-color: #fdfdfd;
-        }
-
-        .btn-3d:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0px rgba(255, 255, 255, 0.4), 0 5px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        /* ===== LAYANAN UNGGULAN CARDS ===== */
-        .feature-card {
-            background: white;
-            border: none;
-            border-radius: 20px;
-            padding: 30px;
-            height: 100%;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03), 0 1px 8px rgba(0, 0, 0, 0.02);
-            z-index: 2;
-            position: relative;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(204, 0, 0, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04);
-        }
-
-        .icon-wrapper {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, rgba(204, 0, 0, 0.1) 0%, rgba(204, 0, 0, 0.05) 100%);
-            color: var(--telkom-red);
-            border-radius: 50%;
-            display: flex;
+        .brand-mark {
+            width: 48px;
+            height: 48px;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
-            margin: 0 auto 20px;
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover .icon-wrapper {
-            background: var(--telkom-red);
-            color: white;
-            transform: rotateY(180deg);
-        }
-
-        /* ===== PROMPT SUGGESTION CARDS ===== */
-        .prompt-card {
-            background: #ffffff;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            border-radius: 16px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
-        }
-
-        .prompt-card:hover {
-            border-color: var(--telkom-red);
-            background: rgba(204, 0, 0, 0.02);
-            transform: translateX(5px);
-        }
-
-        .prompt-icon {
-            background: rgba(204, 0, 0, 0.1);
-            color: var(--telkom-red);
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-
-        /* ===== DIAGRAM & ALUR FOTO CARDS (NEW) ===== */
-        .diagram-card {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            height: 100%;
-            display: flex;
-            /* Ditambahkan agar isi kartu sejajar rapi */
-            flex-direction: column;
-            /* Ditambahkan agar susunan tetap ke bawah */
-        }
-
-        .diagram-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(204, 0, 0, 0.1);
-        }
-
-        .diagram-card img {
-            border-radius: 12px;
-            width: 100%;
-            aspect-ratio: 4 / 3;
-            /* Kunci 1: Memaksa bingkai gambar memiliki ukuran seragam */
-            object-fit: contain;
-            /* Kunci 2: Gambar tidak akan gepeng dan tidak terpotong */
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            background-color: #ffffff;
-            /* Menyamarkan area kosong jika rasio gambar asli lebih kecil */
-            margin: auto 0;
-            /* Menempatkan gambar di tengah secara vertikal */
-        }
-
-        /* ===== LINK TERKAIT CARDS (NEW) ===== */
-        .link-card {
-            display: flex;
-            align-items: center;
-            padding: 20px;
-            background: white;
-            border-radius: 16px;
-            text-decoration: none;
-            color: var(--text-main);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            height: 100%;
-        }
-
-        .link-card:hover {
-            background: linear-gradient(135deg, var(--telkom-red), var(--telkom-dark-red));
-            color: white !important;
-            transform: translateY(-5px);
-        }
-
-        .link-card:hover .link-icon {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-        }
-
-        .link-card:hover h6,
-        .link-card:hover small {
-            color: white !important;
-        }
-
-        .link-icon {
-            width: 55px;
-            height: 55px;
-            background: rgba(204, 0, 0, 0.08);
-            color: var(--telkom-red);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-right: 15px;
-            transition: all 0.3s;
-            flex-shrink: 0;
-        }
-
-        /* ===== FAQ ACCORDION ===== */
-        .accordion-item {
-            border: none;
-            background: white;
-            border-radius: 15px !important;
-            margin-bottom: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+            margin-right: 12px;
             overflow: hidden;
+            border: 1px solid rgba(23, 32, 48, .08);
+            border-radius: 15px;
+            background: #fff;
+            box-shadow: 0 10px 20px rgba(23, 32, 48, .08);
+        }
+
+        .brand-mark img {
+            width: 100%;
+            height: 100%;
+            padding: 4px;
+            object-fit: contain;
+        }
+
+        .ssc-brand-name,
+        .ssc-hero-name {
+            font-family: "Outfit", Arial, sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+        }
+
+        .ssc-brand-name {
+            display: block;
+            color: var(--ink);
+            font-size: 1.1rem;
+            line-height: 1.05;
+            white-space: nowrap;
+        }
+
+        .ssc-brand-name .ssc-s1 { color: var(--red); }
+        .ssc-brand-name .ssc-s2 { color: var(--purple); }
+        .ssc-brand-name .ssc-c { color: #0c9a72; }
+
+        .brand-subtitle {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font-family: "DM Sans", sans-serif;
+            font-size: .63rem;
+            font-weight: 800;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+
+        .navbar-nav .nav-link {
+            position: relative;
+            color: #465268 !important;
+            padding: 10px 13px !important;
+            font-size: .89rem;
+            font-weight: 700;
+            transition: color .2s ease, transform .2s ease;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--red) !important;
+            transform: translateY(-1px);
+        }
+
+        .nav-admin {
+            display: inline-flex !important;
+            align-items: center;
+            margin-left: 8px;
+            padding: 10px 16px !important;
+            border: 1px solid rgba(215, 25, 32, .18);
+            border-radius: 999px;
+            color: var(--red) !important;
+            background: rgba(215, 25, 32, .055);
+        }
+
+        .navbar-nav .nav-link.nav-admin:hover {
+            color: #fff !important;
+            border-color: transparent;
+            background: linear-gradient(135deg, var(--red), var(--wine));
+            box-shadow: 0 10px 20px rgba(215, 25, 32, .22);
+        }
+
+        .navbar-toggler {
+            border: 0;
+            box-shadow: none !important;
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            color: #fff;
+            background:
+                radial-gradient(circle at 84% 13%, rgba(255, 225, 175, .21), transparent 27%),
+                radial-gradient(circle at 14% 92%, rgba(244, 84, 95, .19), transparent 34%),
+                linear-gradient(118deg, #280106 0%, #57070f 35%, #940e17 68%, #d71920 100%);
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: .25;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cg fill='none' stroke='%23ffe6b4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M150 27C109 63 109 118 150 150C191 118 191 63 150 27Z' stroke-width='2'/%3E%3Cpath d='M273 150C237 109 182 109 150 150C182 191 237 191 273 150Z' stroke-width='2'/%3E%3Cpath d='M150 273C191 237 191 182 150 150C109 182 109 237 150 273Z' stroke-width='2'/%3E%3Cpath d='M27 150C63 191 118 191 150 150C118 109 63 109 27 150Z' stroke-width='2'/%3E%3Ccircle cx='150' cy='150' r='4' fill='%23ffe6b4' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 300px 300px;
+            animation: luxuryKawungDrift 58s linear infinite;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(112deg, transparent 10%, rgba(255, 244, 218, .075) 49%, transparent 82%),
+                radial-gradient(circle at 82% 14%, rgba(255, 239, 207, .11), transparent 22%);
+            mix-blend-mode: screen;
+        }
+
+        @keyframes luxuryKawungDrift {
+            from { background-position: 0 0; }
+            to { background-position: -300px 300px; }
+        }
+
+        .hero-luxury-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: .35;
+            background:
+                radial-gradient(circle at 18% 20%, rgba(255,255,255,.08) 0 1px, transparent 1.5px),
+                radial-gradient(circle at 65% 45%, rgba(255,255,255,.05) 0 1px, transparent 1.5px);
+            background-size: 260px 180px, 330px 220px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 84px 0 78px;
+        }
+
+        .hero .row {
+            --bs-gutter-x: 4.5rem;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 9px 14px 9px 12px;
+            border: 1px solid rgba(255,255,255,.22);
+            border-radius: 999px;
+            color: rgba(255,255,255,.96);
+            background: rgba(255,255,255,.095);
+            backdrop-filter: blur(10px);
+            font-size: .78rem;
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #89efb3;
+            box-shadow: 0 0 0 5px rgba(137,239,179,.14);
+        }
+
+        .hero-title.hero-ssc-title {
+            max-width: 720px;
+            margin: 20px 0 18px;
+            font-size: clamp(3.05rem, 5.8vw, 5.45rem);
+            font-weight: 800;
+            line-height: .99;
+        }
+
+        .ssc-hero-name {
+            display: block;
+            text-shadow: 0 10px 30px rgba(0,0,0,.22);
+        }
+
+        .ssc-hero-name .ssc-s1 { color: #c4a1ff; }
+        .ssc-hero-name .ssc-s2 { color: #c4a1ff; }
+        .ssc-hero-name .ssc-c { color: #c4a1ff; }
+
+        .hero-copy {
+            max-width: 590px;
+            margin: 0 0 28px;
+            color: rgba(255,255,255,.89);
+            font-size: 1.02rem;
+            font-weight: 500;
+            line-height: 1.82;
+        }
+
+        .btn-primary-ssc,
+        .btn-secondary-ssc {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 50px;
+            padding: 13px 20px;
+            border-radius: 14px;
+            font-size: .9rem;
+            font-weight: 800;
+            transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+        }
+
+        .btn-primary-ssc {
+            color: var(--red);
+            background: #fff;
+            box-shadow: 0 12px 28px rgba(0,0,0,.18);
+        }
+
+        .btn-primary-ssc:hover {
+            color: var(--red);
+            transform: translateY(-3px);
+            box-shadow: 0 18px 34px rgba(0,0,0,.24);
+        }
+
+        .btn-secondary-ssc {
+            margin-left: 9px;
+            border: 1px solid rgba(255,255,255,.27);
+            color: #fff;
+            background: rgba(255,255,255,.08);
+        }
+
+        .btn-secondary-ssc:hover {
+            color: #fff;
+            transform: translateY(-3px);
+            background: rgba(255,255,255,.16);
+        }
+
+        .hero-media {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-left: auto;
+            padding: 16px;
+            border: 1px solid rgba(255,255,255,.24);
+            border-radius: 31px;
+            background: rgba(255,255,255,.09);
+            box-shadow: 0 30px 65px rgba(24,0,3,.31);
+            backdrop-filter: blur(9px);
+        }
+
+        .hero-media-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            min-height: 36px;
+        }
+
+        .hero-media-inner {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,.18);
+            border-radius: 20px;
+            background: #1d0d0f;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,.14);
+        }
+
+        .hero-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform .7s ease;
+        }
+
+        .hero-media:hover img { transform: scale(1.025); }
+
+        .hero-photo-tag,
+        .hero-status-card {
+            position: static;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 34px;
+            padding: 8px 11px;
+            border: 1px solid rgba(255,255,255,.18);
+            border-radius: 999px;
+            background: rgba(35, 7, 11, .36);
+            backdrop-filter: blur(10px);
+            font-size: .72rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .hero-photo-tag {
+            color: rgba(255,255,255,.96);
+        }
+
+        .hero-status-card {
+            flex: 0 0 auto;
+            color: #ecfff4;
+        }
+
+        .hero-status-card i { color: #8df2b7; }
+
+        .hero-status-card small,
+        .hero-status-card strong { display: none; }
+
+        .hero-status-card span {
+            display: inline;
+            margin: 0;
+            color: inherit;
+            font-size: inherit;
+            font-weight: inherit;
+        }
+
+        .hero-status-card span::before { display: none; }
+
+        .hero-caption {
+            position: static;
+            width: 100%;
+            padding: 3px 2px 1px;
+            color: #fff;
+            background: transparent;
+        }
+
+        .hero-caption h5 {
+            margin: 0 0 4px;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 800;
+            line-height: 1.25;
+        }
+
+        .hero-caption p {
+            margin: 0;
+            color: rgba(255,255,255,.82);
+            font-size: .80rem;
+            font-weight: 600;
+            line-height: 1.56;
+        }
+
+        /* STATISTICS */
+        .stats-section {
+            padding: 28px 0 4px;
+            background: transparent;
+        }
+
+        .stats-panel {
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,.88);
+            border-radius: 23px;
+            background: rgba(255,255,255,.96);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-item {
+            min-height: 108px;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 22px 24px;
+            border-right: 1px solid var(--line);
+        }
+
+        .stat-item:last-child { border-right: 0; }
+
+        .stat-icon {
+            width: 46px;
+            height: 46px;
+            flex: 0 0 46px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            color: var(--red);
+            background: rgba(215,25,32,.09);
+            font-size: 1.05rem;
+        }
+
+        .stat-number {
+            display: block;
+            color: var(--ink);
+            font-family: "Outfit", sans-serif;
+            font-size: 1.48rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .stat-label {
+            display: block;
+            margin-top: 5px;
+            color: var(--muted);
+            font-size: .78rem;
+            font-weight: 700;
+            line-height: 1.35;
+        }
+
+        /* FOCUS AREAS */
+        .focus-card {
+            position: relative;
+            min-height: 340px;
+            height: 100%;
+            overflow: hidden;
+            padding: 31px;
+            border-radius: 27px;
+            color: #fff;
+            box-shadow: 0 20px 46px rgba(24, 33, 49, .14);
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .focus-card:hover {
+            color: #fff;
+            transform: translateY(-7px);
+            box-shadow: 0 30px 58px rgba(24, 33, 49, .18);
+        }
+
+        .focus-card::before {
+            content: "";
+            position: absolute;
+            right: -82px;
+            bottom: -96px;
+            width: 270px;
+            height: 270px;
+            border: 1px solid rgba(255,255,255,.19);
+            border-radius: 50%;
+            box-shadow: 0 0 0 36px rgba(255,255,255,.05), 0 0 0 73px rgba(255,255,255,.025);
+        }
+
+        .focus-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: .22;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1.2'%3E%3Cpath d='M75 14C54 34 54 59 75 75C96 59 96 34 75 14Z'/%3E%3Cpath d='M136 75C116 54 91 54 75 75C91 96 116 96 136 75Z'/%3E%3Cpath d='M75 136C96 116 96 91 75 75C54 91 54 116 75 136Z'/%3E%3Cpath d='M14 75C34 96 59 96 75 75C59 54 34 54 14 75Z'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 150px 150px;
+        }
+
+        .focus-kp {
+            background: radial-gradient(circle at 84% 12%, rgba(255,225,180,.18), transparent 29%), linear-gradient(135deg, #ca101b, #65070e);
+        }
+
+        .focus-ta {
+            background: radial-gradient(circle at 84% 12%, rgba(226,211,255,.18), transparent 29%), linear-gradient(135deg, #6940aa, #2a1249);
+        }
+
+        .focus-icon,
+        .focus-content,
+        .focus-arrow,
+        .focus-number { position: relative; z-index: 1; }
+
+        .focus-icon {
+            width: 60px;
+            height: 60px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 54px;
+            border: 1px solid rgba(255,255,255,.20);
+            border-radius: 18px;
+            color: inherit;
+            background: rgba(255,255,255,.14);
+            backdrop-filter: blur(6px);
+            font-size: 1.35rem;
+        }
+
+        .focus-number {
+            position: absolute;
+            top: 27px;
+            right: 30px;
+            color: rgba(255,255,255,.34);
+            font-family: "Outfit", sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .focus-card h3 {
+            margin-bottom: 9px;
+            color: #fff;
+            font-size: 1.68rem;
+            font-weight: 800;
+        }
+
+        .focus-card p {
+            max-width: 430px;
+            margin: 0;
+            color: rgba(255,255,255,.87);
+            font-size: .92rem;
+            font-weight: 600;
+            line-height: 1.72;
+        }
+
+        .focus-arrow {
+            position: absolute;
+            right: 28px;
+            bottom: 28px;
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255,255,255,.22);
+            border-radius: 50%;
+            color: inherit;
+            background: rgba(255,255,255,.14);
+            transition: transform .2s ease, background .2s ease;
+        }
+
+        .focus-card:hover .focus-arrow {
+            transform: rotate(45deg);
+            background: rgba(255,255,255,.23);
+        }
+
+        /* INFORMATION CARDS */
+        .service-card {
+            height: 100%;
+            padding: 31px;
+            border: 1px solid rgba(23,32,48,.06);
+            border-radius: var(--radius-lg);
+            background: #fff;
+            box-shadow: 0 12px 34px rgba(28,25,38,.045);
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 47px rgba(28,25,38,.095);
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 22px;
+            border-radius: 17px;
+            color: #fff;
+            box-shadow: 0 12px 22px rgba(215,25,32,.18);
+            font-size: 1.2rem;
+        }
+
+        .service-card.service-kp .service-icon {
+            background: linear-gradient(135deg, #c5101a, #67070e);
+        }
+
+        .service-card.service-ta .service-icon {
+            background: linear-gradient(135deg, #7140bc, #2f134f);
+            box-shadow: 0 12px 22px rgba(81,45,140,.18);
+        }
+
+        .service-card h4 {
+            margin-bottom: 10px;
+            color: var(--ink);
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+
+        .service-card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: .92rem;
+            line-height: 1.78;
+        }
+
+        .info-band {
+            margin-top: 30px;
+            padding: 24px;
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            background: linear-gradient(180deg, #ffffff, #fafbfe);
+            box-shadow: 0 14px 35px rgba(28,25,38,.045);
+        }
+
+        .info-band-item {
+            min-height: 66px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .info-band-icon {
+            width: 42px;
+            height: 42px;
+            flex: 0 0 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 13px;
+            color: var(--red);
+            background: rgba(215,25,32,.08);
+        }
+
+        .info-band-item h6 {
+            margin: 1px 0 4px;
+            color: var(--ink);
+            font-size: .95rem;
+            font-weight: 800;
+        }
+
+        .info-band-item p {
+            margin: 0;
+            color: var(--muted);
+            font-size: .81rem;
+            line-height: 1.58;
+        }
+
+        /* HOW IT WORKS */
+        .visual-section {
+            position: relative;
+            overflow: hidden;
+            color: #fff;
+            background:
+                radial-gradient(circle at 85% 8%, rgba(215,25,32,.20), transparent 28%),
+                linear-gradient(135deg, #111824, #1a2636);
+        }
+
+        .visual-section::before {
+            content: "";
+            position: absolute;
+            top: -320px;
+            right: -220px;
+            width: 680px;
+            height: 680px;
+            border-radius: 50%;
+            background: rgba(215,25,32,.12);
+            filter: blur(30px);
+        }
+
+        .visual-section .section-title { color: #fff; }
+        .visual-section .section-copy { color: rgba(255,255,255,.79); }
+
+        .visual-section .section-kicker {
+            color: #ffd6d8;
+            background: rgba(255,255,255,.08);
+        }
+
+        .visual-section .section-kicker::before {
+            background: #ffd6d8;
+            box-shadow: 0 0 0 5px rgba(255,214,216,.12);
+        }
+
+        .ssc-step {
+            position: relative;
+            height: 100%;
+            min-height: 206px;
+            padding: 28px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,.13);
+            border-radius: 22px;
+            background: rgba(255,255,255,.075);
+            box-shadow: 0 15px 34px rgba(0,0,0,.11);
+            backdrop-filter: blur(8px);
+        }
+
+        .ssc-step::after {
+            content: "";
+            position: absolute;
+            right: -35px;
+            bottom: -48px;
+            width: 135px;
+            height: 135px;
+            border: 1px solid rgba(255,255,255,.13);
+            border-radius: 50%;
+            box-shadow: 0 0 0 22px rgba(255,255,255,.025);
+        }
+
+        .ssc-step-number,
+        .ssc-step h4,
+        .ssc-step p { position: relative; z-index: 1; }
+
+        .ssc-step-number {
+            width: 36px;
+            height: 36px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 19px;
+            border-radius: 12px;
+            color: #fff1d4;
+            background: rgba(255,255,255,.12);
+            font-size: .76rem;
+            font-weight: 800;
+        }
+
+        .ssc-step h4 {
+            margin-bottom: 9px;
+            color: #fff;
+            font-size: 1.18rem;
+            font-weight: 800;
+        }
+
+        .ssc-step p {
+            margin: 0;
+            color: rgba(255,255,255,.78);
+            font-size: .87rem;
+            line-height: 1.68;
+        }
+
+        .focus-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 11px;
+            margin-top: 24px;
+            padding: 17px 19px;
+            border: 1px solid rgba(255,255,255,.13);
+            border-radius: 16px;
+            color: rgba(255,255,255,.80);
+            background: rgba(255,255,255,.055);
+            font-size: .88rem;
+            line-height: 1.68;
+        }
+
+        .focus-note i {
+            margin-top: 3px;
+            color: #ffd0d3;
+        }
+
+        /* CHAT PREVIEW */
+        .ai-preview,
+        .question-panel {
+            height: 100%;
+            border-radius: 28px;
+        }
+
+        .ai-preview {
+            padding: 32px;
+            color: #fff;
+            background:
+                radial-gradient(circle at 88% 7%, rgba(255,220,173,.16), transparent 28%),
+                linear-gradient(135deg, #c8121b, #62070e);
+            box-shadow: 0 24px 50px rgba(157,13,20,.20);
+        }
+
+        .ai-preview-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 26px;
+        }
+
+        .ai-profile {
+            display: flex;
+            align-items: center;
+            min-width: 0;
+            gap: 12px;
+        }
+
+        .ai-avatar {
+            width: 47px;
+            height: 47px;
+            flex: 0 0 47px;
+            display: grid;
+            place-items: center;
+            border-radius: 15px;
+            color: var(--red);
+            background: #fff;
+            font-size: 1.16rem;
+        }
+
+        .ai-profile h5 {
+            margin: 0 0 3px;
+            color: #fff;
+            font-size: .98rem;
+            font-weight: 800;
+        }
+
+        .ai-profile p {
+            margin: 0;
+            color: rgba(255,255,255,.73);
+            font-size: .72rem;
+        }
+
+        .ai-live {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            flex: 0 0 auto;
+            padding: 7px 10px;
+            border-radius: 999px;
+            color: #dbffe9;
+            background: rgba(255,255,255,.12);
+            font-size: .68rem;
+            font-weight: 800;
+        }
+
+        .ai-live::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #76e8a3;
+        }
+
+        .chat-mini {
+            margin: 13px 0;
+            padding: 14px 15px;
+            border-radius: 16px;
+            font-size: .86rem;
+            line-height: 1.67;
+        }
+
+        .chat-mini.user {
+            width: 87%;
+            margin-left: auto;
+            color: #651015;
+            background: #fff;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-mini.bot {
+            width: 93%;
+            color: rgba(255,255,255,.91);
+            border: 1px solid rgba(255,255,255,.16);
+            background: rgba(255,255,255,.11);
+            border-bottom-left-radius: 4px;
+        }
+
+        .mini-source {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: 9px;
+            color: #ffe4e6;
+            font-size: .69rem;
+            font-weight: 700;
+        }
+
+        .question-panel {
+            padding: 32px;
+            border: 1px solid var(--line);
+            background: #fff;
+            box-shadow: 0 18px 48px rgba(28,25,38,.06);
+        }
+
+        .question-panel h3 {
+            margin: 14px 0 10px;
+            color: var(--ink);
+            font-size: clamp(1.75rem, 3vw, 2rem);
+            font-weight: 800;
+            line-height: 1.13;
+        }
+
+        .question-panel > p {
+            margin-bottom: 20px;
+            color: var(--muted);
+            font-size: .9rem;
+            line-height: 1.7;
+        }
+
+        .question-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 11px;
+            padding: 13px 14px;
+            border: 1px solid rgba(23,27,38,.08);
+            border-radius: 14px;
+            color: var(--ink);
+            background: #fff;
+            font-size: .85rem;
+            font-weight: 700;
+            line-height: 1.4;
+            transition: border .2s ease, transform .2s ease, box-shadow .2s ease, color .2s ease;
+        }
+
+        .question-item:hover {
+            color: var(--red);
+            border-color: rgba(215,25,32,.30);
+            transform: translateX(4px);
+            box-shadow: 0 10px 20px rgba(215,25,32,.065);
+        }
+
+        .question-item span {
+            width: 33px;
+            height: 33px;
+            flex: 0 0 33px;
+            display: grid;
+            place-items: center;
+            border-radius: 11px;
+            color: var(--red);
+            background: rgba(215,25,32,.09);
+        }
+
+        /* FAQ */
+        .faq-wrap {
+            max-width: 920px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            margin-bottom: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(23,27,38,.08) !important;
+            border-radius: 16px !important;
+            background: #fff;
+            box-shadow: 0 8px 22px rgba(25,29,36,.035);
         }
 
         .accordion-button {
-            font-weight: 600;
-            color: var(--text-main);
-            background-color: white;
-            padding: 20px;
-            border-radius: 15px !important;
+            padding: 19px 21px;
+            color: var(--ink);
+            background: #fff;
+            font-size: .94rem;
+            font-weight: 800;
+            box-shadow: none !important;
         }
 
         .accordion-button:not(.collapsed) {
-            color: var(--telkom-red);
-            background-color: rgba(204, 0, 0, 0.03);
-            box-shadow: none;
+            color: var(--red);
+            background: rgba(215,25,32,.035);
         }
 
-        .accordion-button:focus {
-            box-shadow: none;
-            border-color: rgba(0, 0, 0, 0.125);
+        .accordion-button::after { transform: scale(.8); }
+
+        .accordion-body {
+            padding: 0 21px 20px;
+            color: var(--muted);
+            font-size: .9rem;
+            line-height: 1.72;
         }
+
+        /* CTA */
+        .cta-section { padding-bottom: 94px; }
+
+        .cta-card {
+            position: relative;
+            overflow: hidden;
+            padding: 58px;
+            border-radius: 32px;
+            color: #fff;
+            background:
+                radial-gradient(circle at 85% 16%, rgba(255,221,179,.17), transparent 25%),
+                linear-gradient(125deg, #4d060b, #a10f17 54%, #dc2430);
+            box-shadow: 0 28px 55px rgba(123,10,17,.20);
+        }
+
+        .cta-card::before {
+            content: "";
+            position: absolute;
+            top: -230px;
+            right: -170px;
+            width: 580px;
+            height: 580px;
+            border: 1px solid rgba(255,255,255,.20);
+            border-radius: 50%;
+            box-shadow: 0 0 0 50px rgba(255,255,255,.045), 0 0 0 100px rgba(255,255,255,.027);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+        }
+
+        .cta-card h2 {
+            margin: 16px 0;
+            color: #fff;
+            font-size: clamp(2rem, 4vw, 3.15rem);
+            font-weight: 800;
+            line-height: 1.07;
+        }
+
+        .cta-card p {
+            max-width: 610px;
+            margin-bottom: 27px;
+            color: rgba(255,255,255,.88);
+            font-size: .98rem;
+            line-height: 1.76;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 56px 0 24px;
+            color: rgba(255,255,255,.67);
+            background: #131722;
+        }
+
+        .footer-brand {
+            color: #fff;
+            font-family: "Outfit", sans-serif;
+            font-size: 1.16rem;
+            font-weight: 800;
+        }
+
+        .footer-copy {
+            max-width: 360px;
+            margin: 14px 0 0;
+            font-size: .84rem;
+            line-height: 1.75;
+        }
+
+        .footer-title {
+            margin-bottom: 15px;
+            color: #fff;
+            font-family: "DM Sans", sans-serif;
+            font-size: .78rem;
+            font-weight: 800;
+            letter-spacing: .09em;
+            text-transform: uppercase;
+        }
+
+        .footer-links a {
+            display: block;
+            margin-bottom: 10px;
+            color: rgba(255,255,255,.65);
+            font-size: .83rem;
+            transition: color .2s ease;
+        }
+
+        .footer-links a:hover { color: #fff; }
+
+        .socials a {
+            width: 37px;
+            height: 37px;
+            display: inline-grid;
+            place-items: center;
+            margin-right: 7px;
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 50%;
+            color: #fff;
+            transition: background .2s ease, transform .2s ease;
+        }
+
+        .socials a:hover {
+            color: #fff;
+            background: var(--red);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            margin-top: 44px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,.10);
+            font-size: .76rem;
+        }
+
+        /* MOTION */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: reveal .72s ease forwards;
+        }
+
+        .delay-1 { animation-delay: .10s; }
+        .delay-2 { animation-delay: .20s; }
+        .delay-3 { animation-delay: .30s; }
+
+        @keyframes reveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar-collapse { padding: 14px 0 7px; }
+
+            .hero-content { padding: 72px 0 66px; }
+            .hero .row { --bs-gutter-x: 1.5rem; }
+            .hero-media { margin: 16px auto 0; }
+
+            .stat-item:nth-child(2) { border-right: 0; }
+            .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+
+            .section-space { padding: 78px 0; }
+        }
+
+        @media (max-width: 767.98px) {
+            .hero-media-inner {
+                aspect-ratio: 16 / 9;
+            }
+
+            .navbar { min-height: 74px; }
+            .main-nav { min-height: 74px; }
+
+            .brand-mark {
+                width: 42px;
+                height: 42px;
+                margin-right: 10px;
+                border-radius: 13px;
+            }
+
+            .ssc-brand-name { font-size: 1rem; }
+            .brand-subtitle { font-size: .58rem; }
+
+            .hero-content { padding: 62px 0 58px; }
+            .hero-title.hero-ssc-title {
+                margin-top: 18px;
+                font-size: clamp(2.65rem, 12.5vw, 4.15rem);
+            }
+
+            .hero-copy { font-size: .96rem; }
+
+            .btn-primary-ssc,
+            .btn-secondary-ssc {
+                width: 100%;
+            }
+
+            .btn-secondary-ssc {
+                margin: 10px 0 0;
+            }
+
+            .hero-media {
+                max-width: 620px;
+                margin-top: 26px;
+                padding: 13px;
+                gap: 12px;
+            }
+
+            .hero-media-top {
+                gap: 9px;
+            }
+
+            .hero-photo-tag,
+            .hero-status-card {
+                padding: 7px 10px;
+                font-size: .67rem;
+            }
+
+            .hero-caption {
+                padding: 2px 1px 0;
+            }
+
+            .stat-item {
+                min-height: 96px;
+                border-right: 0;
+                border-bottom: 1px solid var(--line);
+            }
+
+            .stat-item:last-child { border-bottom: 0; }
+
+            .info-band-item { margin-bottom: 8px; }
+            .info-band-item:last-child { margin-bottom: 0; }
+
+            .ai-preview,
+            .question-panel { padding: 25px; }
+
+            .cta-card { padding: 38px 25px; }
+        }
+
+        @media (max-width: 460px) {
+            .brand-subtitle { display: none; }
+            .ssc-brand-name { font-size: .95rem; }
+
+            .hero-label { font-size: .72rem; }
+            .hero-media { max-width: 100%; }
+
+            .hero-media {
+                gap: 10px;
+                padding: 11px;
+            }
+
+            .hero-media-top {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .hero-photo-tag,
+            .hero-status-card {
+                max-width: 100%;
+                padding: 7px 10px;
+                font-size: .66rem;
+            }
+
+            .hero-caption {
+                padding: 1px 1px 0;
+            }
+
+            .focus-card { min-height: 300px; padding: 25px; }
+            .focus-icon { margin-bottom: 40px; }
+
+            .ai-preview-top { align-items: flex-start; }
+            .ai-live { margin-top: 2px; }
+
+            .chat-mini.user,
+            .chat-mini.bot { width: 100%; }
+
+            .question-panel { padding: 23px; }
+        }
+
+    
+        /* =========================================================
+           POLISH LAYOUT — SPACING, ALIGNMENT, AND VISUAL RHYTHM
+           Existing content, links, and image paths remain unchanged.
+        ========================================================== */
+        :root {
+            --section-y: clamp(68px, 7.2vw, 104px);
+            --content-gap: clamp(28px, 4vw, 52px);
+            --soft-shadow: 0 18px 42px rgba(19, 26, 39, .075);
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 7% 8%, rgba(215, 25, 32, .04), transparent 27%),
+                radial-gradient(circle at 93% 48%, rgba(132, 80, 189, .03), transparent 24%),
+                linear-gradient(180deg, #fafcff 0%, #f4f7fb 100%);
+        }
+
+        .section-space {
+            padding: var(--section-y) 0;
+        }
+
+        .section-space > .container > .text-center.mb-5 {
+            margin-bottom: clamp(38px, 4.4vw, 58px) !important;
+        }
+
+        .section-title {
+            max-width: 810px;
+            margin-top: 18px;
+            margin-bottom: 15px;
+            font-size: clamp(2.15rem, 3.7vw, 3.45rem);
+            line-height: 1.1;
+        }
+
+        .section-copy {
+            max-width: 720px;
+            font-size: 1.01rem;
+            line-height: 1.8;
+        }
+
+        /* NAVIGATION */
+        .main-nav {
+            border-bottom-color: rgba(23, 32, 48, .075);
+        }
+
+        .navbar-nav {
+            gap: 3px !important;
+        }
+
+        .nav-admin {
+            min-height: 44px;
+        }
+
+        /* HERO */
+        .hero-content {
+            padding: clamp(72px, 8vw, 106px) 0 clamp(78px, 8vw, 102px);
+        }
+
+        .hero .row {
+            --bs-gutter-x: clamp(2.2rem, 5vw, 5.25rem);
+            --bs-gutter-y: 3rem;
+        }
+
+        .hero-title.hero-ssc-title {
+            max-width: 690px;
+            margin-top: 22px;
+            margin-bottom: 20px;
+        }
+
+        .hero-copy {
+            max-width: 565px;
+            margin-bottom: 32px;
+        }
+
+        .hero-media {
+            max-width: 850px;
+            padding: 17px;
+            gap: 15px;
+            border-radius: 30px;
+        }
+
+        .hero-media-inner {
+            border-radius: 19px;
+        }
+
+        .hero-caption {
+            padding: 5px 3px 2px;
+        }
+
+        /* STATS */
+        .stats-section {
+            position: relative;
+            z-index: 4;
+            margin-top: -38px;
+            padding: 0 0 clamp(44px, 5vw, 66px);
+        }
+
+        .stats-panel {
+            border-color: rgba(255, 255, 255, .95);
+            box-shadow: 0 20px 44px rgba(19, 26, 39, .09);
+        }
+
+        .stat-item {
+            min-height: 112px;
+            padding: 23px 25px;
+        }
+
+        .stat-item:hover {
+            background: linear-gradient(180deg, #ffffff, #fafcff);
+        }
+
+        /* SERVICE / FOCUS CARDS */
+        #layanan {
+            padding-top: calc(var(--section-y) - 14px);
+        }
+
+        .focus-card {
+            min-height: 355px;
+            padding: 34px;
+            border: 1px solid rgba(255,255,255,.12);
+        }
+
+        .focus-icon {
+            margin-bottom: 56px;
+        }
+
+        .focus-card p {
+            max-width: 440px;
+        }
+
+        .service-card {
+            min-height: 100%;
+            padding: 34px;
+            border-color: rgba(23,32,48,.075);
+            box-shadow: var(--soft-shadow);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 24px 48px rgba(28,25,38,.10);
+        }
+
+        .info-band {
+            margin-top: 34px;
+            padding: 28px;
+            border-radius: 24px;
+            box-shadow: var(--soft-shadow);
+        }
+
+        .info-band .row {
+            --bs-gutter-y: 1.35rem;
+        }
+
+        .info-band-item {
+            min-height: 72px;
+        }
+
+        /* HOW IT WORKS */
+        .visual-section {
+            padding: clamp(82px, 8vw, 112px) 0 clamp(86px, 8vw, 116px);
+        }
+
+        .visual-section .section-title {
+            max-width: 860px;
+        }
+
+        .visual-section .row {
+            --bs-gutter-y: 1.5rem;
+        }
+
+        .ssc-step {
+            min-height: 226px;
+            padding: 31px 30px;
+            border-radius: 24px;
+        }
+
+        .ssc-step-number {
+            margin-bottom: 22px;
+        }
+
+        .focus-note {
+            max-width: 1140px;
+            margin: 30px auto 0;
+            padding: 19px 21px;
+            border-radius: 18px;
+        }
+
+        /* CHAT PREVIEW — create breathing room after dark section */
+        .visual-section + .section-space.pt-0 {
+            padding-top: clamp(60px, 7vw, 96px) !important;
+            padding-bottom: clamp(76px, 8vw, 110px);
+        }
+
+        .ai-preview,
+        .question-panel {
+            border-radius: 30px;
+            box-shadow: var(--soft-shadow);
+        }
+
+        .ai-preview {
+            padding: 35px;
+            min-height: 100%;
+        }
+
+        .question-panel {
+            padding: 35px;
+            border-color: rgba(23,32,48,.085);
+        }
+
+        .question-panel > p {
+            margin-bottom: 23px;
+        }
+
+        .question-item {
+            min-height: 62px;
+            margin-top: 12px;
+            padding: 14px 15px;
+            border-radius: 15px;
+        }
+
+        /* FAQ — remove the large empty gap before CTA */
+        #faq.section-space {
+            padding-top: clamp(74px, 7vw, 96px);
+            padding-bottom: clamp(46px, 4.5vw, 66px);
+        }
+
+        .faq-wrap {
+            max-width: 940px;
+        }
+
+        .accordion-item {
+            margin-bottom: 14px;
+            border-radius: 18px !important;
+            box-shadow: 0 10px 26px rgba(25,29,36,.04);
+        }
+
+        .accordion-button {
+            min-height: 68px;
+            padding: 20px 22px;
+        }
+
+        .accordion-body {
+            padding: 0 22px 22px;
+        }
+
+        /* CTA */
+        .cta-section {
+            padding: clamp(20px, 3vw, 38px) 0 clamp(82px, 8vw, 110px);
+            background:
+                radial-gradient(circle at 90% 18%, rgba(215,25,32,.035), transparent 26%),
+                linear-gradient(180deg, #ffffff 0%, #f5f8fc 100%);
+        }
+
+        .cta-card {
+            padding: clamp(42px, 5.2vw, 64px);
+            border-radius: 34px;
+            box-shadow: 0 30px 60px rgba(123,10,17,.20);
+        }
+
+        .cta-content {
+            max-width: 670px;
+        }
+
+        .cta-card h2 {
+            max-width: 660px;
+            margin: 18px 0;
+        }
+
+        /* FOOTER */
+        footer {
+            padding-top: 62px;
+        }
+
+        .footer-bottom {
+            margin-top: 48px;
+        }
+
+        /* MICRO INTERACTIONS */
+        .focus-card,
+        .service-card,
+        .question-item,
+        .accordion-item,
+        .stats-panel,
+        .hero-media {
+            will-change: transform;
+        }
+
+        @media (max-width: 991.98px) {
+            .stats-section {
+                margin-top: 0;
+                padding-top: 28px;
+            }
+
+            .hero-content {
+                padding-top: 72px;
+            }
+
+            .hero-media {
+                max-width: 720px;
+            }
+
+            .focus-card {
+                min-height: 320px;
+            }
+
+            .visual-section + .section-space.pt-0 {
+                padding-top: 66px !important;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .section-space {
+                padding: 70px 0;
+            }
+
+            .hero-content {
+                padding: 60px 0 64px;
+            }
+
+            .hero-media {
+                padding: 13px;
+                border-radius: 24px;
+            }
+
+            .stats-section {
+                padding: 22px 0 42px;
+            }
+
+            .stat-item {
+                min-height: 94px;
+                padding: 19px 21px;
+            }
+
+            .focus-card,
+            .service-card {
+                padding: 28px;
+            }
+
+            .focus-card {
+                min-height: 300px;
+            }
+
+            .focus-icon {
+                margin-bottom: 42px;
+            }
+
+            .info-band,
+            .question-panel,
+            .ai-preview {
+                padding: 25px;
+            }
+
+            .visual-section {
+                padding: 76px 0 80px;
+            }
+
+            .ssc-step {
+                min-height: auto;
+                padding: 27px 25px;
+            }
+
+            #faq.section-space {
+                padding-top: 68px;
+                padding-bottom: 40px;
+            }
+
+            .cta-section {
+                padding-top: 18px;
+                padding-bottom: 72px;
+            }
+
+            .cta-card {
+                padding: 36px 25px;
+                border-radius: 27px;
+            }
+        }
+
+    
+        /* ===== PERBAIKAN PANEL STATISTIK: TIDAK TRANSPARAN ===== */
+        .stats-section {
+            background: #f4f7fb;
+        }
+
+        .stats-panel {
+            isolation: isolate;
+            opacity: 1 !important;
+            border: 1px solid #ffffff !important;
+            background: #ffffff !important;
+            box-shadow: 0 22px 46px rgba(19, 26, 39, .11) !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+
+        .stats-panel::before,
+        .stats-panel::after {
+            display: none !important;
+            content: none !important;
+        }
+
+        .stat-item {
+            opacity: 1 !important;
+            background: #ffffff !important;
+        }
+
+        .stat-item:hover {
+            background: #ffffff !important;
+        }
+
+        @media (max-width: 991.98px) {
+            .stats-section {
+                background: #f4f7fb;
+            }
+        }
+
     </style>
 </head>
 
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+    <nav class="main-nav navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="#"><i class="fa-solid fa-graduation-cap me-2"></i>SSC Smart Internship</a>
-            <button class="navbar-collapse collapse navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNav">
-                <i class="fa-solid fa-bars text-danger"></i>
+            <a class="navbar-brand d-flex align-items-center" href="#beranda">
+                <span class="brand-mark">
+                    <img src="{{ url_for('static', filename='images/logotelkom.jpg') }}"
+                        alt="Logo Telkom University">
+                </span>
+                <span>
+                    <span class="ssc-brand-name">
+                        <span class="ssc-s1">S</span>tudent
+                        <span class="ssc-s2">S</span>ervice
+                        <span class="ssc-c">C</span>enter
+                    </span>
+                    <span class="brand-subtitle">Telkom University Surabaya</span>
+                </span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Buka navigasi">
+                <i class="fa-solid fa-bars-staggered fs-5 text-danger"></i>
             </button>
+
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-center">
-                    <li class="nav-item"><a class="nav-link active px-3" href="#">Beranda</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#fitur">Layanan</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#diagram">Alur & Prosedur</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#links">Tautan</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#faq">FAQ</a></li>
+                <ul class="navbar-nav align-items-lg-center gap-lg-1">
+                    <li class="nav-item"><a class="nav-link active" href="#beranda">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#layanan">Layanan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#cara-kerja">Cara Kerja</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
                     <li class="nav-item ms-lg-2">
-                        <a class="btn btn-sm btn-outline-danger rounded-pill px-4 shadow-sm" href="/workspace">
-                            <i class="fa-solid fa-lock me-1"></i> Workspace
+                        <a class="nav-link nav-admin" href="/admin/login">
+                            <i class="fa-solid fa-lock me-2"></i>Admin Workspace
                         </a>
                     </li>
                 </ul>
@@ -391,149 +1770,93 @@
         </div>
     </nav>
 
-    <header class="hero-wrapper">
-        <div class="hero-motif"></div>
-        <div class="hero-glow"></div>
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-5 mb-lg-0">
-                    <div class="hero-glass-card">
-                        <span class="badge bg-light text-danger mb-3 px-3 py-2 rounded-pill shadow-sm">
-                            <i class="fa-solid fa-circle text-success me-1"
-                                style="font-size: 8px; vertical-align: middle;"></i> AI Assistant Aktif
-                        </span>
-                        <h1 class="display-5 fw-bold mb-3">Panduan Kerja Praktik Lebih Mudah & Cepat</h1>
-                        <p class="lead mb-4 opacity-75" style="font-size: 1.1rem;">Tidak perlu bingung mencari aturan di
-                            tumpukan dokumen. Tanyakan langsung syarat, prosedur, dan alur Kerja Praktik kepada Asisten
-                            Virtual cerdas kami kapan saja.</p>
-                        <a href="/chat" class="btn btn-3d"><i class="fa-solid fa-paper-plane me-2"></i>Mulai
-                            Konsultasi</a>
+    <header class="hero" id="beranda">
+        <div class="hero-luxury-overlay" aria-hidden="true"></div>
+        <div class="hero-content">
+            <div class="container">
+                <div class="row align-items-center gy-5">
+                    <div class="col-lg-5">
+                        <div class="hero-label reveal">
+                            <span class="status-dot"></span>Asisten virtual SSC sedang aktif
+                        </div>
+
+                        <h1 class="hero-title hero-ssc-title reveal delay-1">
+                            <span class="ssc-hero-name">
+                                <span class="ssc-s1">S</span>tudent<br>
+                                <span class="ssc-s2">S</span>ervice <span class="ssc-c">C</span>enter
+                            </span>
+                        </h1>
+
+                        <p class="hero-copy reveal delay-2">
+                            Ruang layanan digital untuk membantu mahasiswa Telkom University Surabaya memperoleh
+                            arahan awal seputar Kerja Praktik dan Tugas Akhir secara lebih mudah, cepat, dan terarah.
+                        </p>
+
+                        <div class="reveal delay-3">
+                            <a href="/chat" class="btn-primary-ssc">
+                                <i class="fa-solid fa-sparkles"></i>Mulai Tanya Asisten
+                            </a>
+                            <a href="#layanan" class="btn-secondary-ssc">
+                                <i class="fa-solid fa-compass"></i>Jelajahi Layanan
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-6 text-center mt-4 mt-lg-0">
-                    <div class="hero-image-container">
-                        <img src="{{ url_for('static', filename='images/mahasiswa-telkom.jpg') }}"
-                            alt="Ilustrasi Mahasiswa" class="hero-image img-fluid">
+
+                    <div class="col-lg-7">
+                        <div class="hero-media reveal delay-2">
+                            <div class="hero-media-top">
+                                <div class="hero-photo-tag">
+                                    <i class="fa-solid fa-graduation-cap"></i>Portal Mahasiswa
+                                </div>
+
+                                <div class="hero-status-card">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    <span>Asisten siap membantu</span>
+                                </div>
+                            </div>
+
+                            <div class="hero-media-inner">
+                                <img src="{{ url_for('static', filename='images/mahasiswatelkom.jpg') }}"
+                                    alt="Mahasiswa Telkom University Surabaya">
+                            </div>
+
+                            <div class="hero-caption">
+                                <h5>Mahasiswa lebih siap melangkah.</h5>
+                                <p>Dapatkan arahan awal untuk Kerja Praktik maupun Tugas Akhir dalam satu layanan SSC.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <main id="fitur" class="container my-5 pt-5">
-        <div class="text-center mb-5">
-            <h6 class="text-danger fw-bold text-uppercase tracking-wide">Layanan Unggulan</h6>
-            <h2 class="fw-bold text-dark">Mengapa Menggunakan SSC Smart?</h2>
-        </div>
-
-        <div class="row g-4 text-center">
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <div class="icon-wrapper"><i class="fa-solid fa-clock-rotate-left"></i></div>
-                    <h5 class="fw-bold">Akses Real-Time 24/7</h5>
-                    <p class="text-muted small mt-3">Dapatkan informasi akademik langsung di tengah malam tanpa harus
-                        menunggu jam operasional loket kampus buka.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <div class="icon-wrapper"><i class="fa-solid fa-bullseye"></i></div>
-                    <h5 class="fw-bold">Jawaban Sangat Akurat</h5>
-                    <p class="text-muted small mt-3">Seluruh respon asisten virtual merujuk langsung pada Buku Pedoman
-                        Kerja Praktik terbaru dan tervalidasi.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <div class="icon-wrapper"><i class="fa-brands fa-whatsapp"></i></div>
-                    <h5 class="fw-bold">Terhubung ke Staf</h5>
-                    <p class="text-muted small mt-3">Jika asisten tidak memiliki jawaban, Anda akan diarahkan langsung
-                        ke WhatsApp resmi Unit Layanan Mahasiswa.</p>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <section id="diagram" class="py-5 bg-light">
+    <section class="stats-section">
         <div class="container">
-            <div class="text-center mb-5">
-                <h6 class="text-danger fw-bold text-uppercase">Visualisasi</h6>
-                <h2 class="fw-bold text-dark">Alur & Prosedur Kerja Praktik</h2>
-                <p class="text-muted">Panduan langkah demi langkah dalam bentuk visual.</p>
-            </div>
-            <div class="row g-4 justify-content-center">
-                <div class="col-lg-6">
-                    <div class="diagram-card text-center">
-                        <h5 class="fw-bold mb-3"><i class="fa-solid fa-users-gear text-danger me-2"></i>Alur Mahasiswa
-                        </h5>
-                        <img src="{{ url_for('static', filename='images/foto-alur-mahasiswa.jpg') }}"
-                            alt="Diagram Alur Mahasiswa" class="img-fluid">
-                        <p class="text-muted small mt-3 mb-0">Diagram alur aktivitas mahasiswa selama masa persiapan
-                            hingga pelaksanaan Kerja Praktik.</p>
+            <div class="stats-panel">
+                <div class="row g-0">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fa-solid fa-robot"></i></div>
+                            <div><span class="stat-number">AI</span><span class="stat-label">Asisten informasi SSC</span></div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="diagram-card text-center">
-                        <h5 class="fw-bold mb-3"><i class="fa-solid fa-file-signature text-danger me-2"></i>Prosedur
-                            Pengajuan</h5>
-                        <img src="{{ url_for('static', filename='images/foto-prosedur-pengajuan.jpg') }}"
-                            alt="Diagram Prosedur Pengajuan" class="img-fluid">
-                        <p class="text-muted small mt-3 mb-0">Tahapan administrasi dan prosedur pengajuan dokumen Kerja
-                            Praktik.</p>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fa-solid fa-briefcase"></i></div>
+                            <div><span class="stat-number">KP</span><span class="stat-label">Layanan Kerja Praktik</span></div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-5 bg-white border-top border-bottom border-light">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-5 mb-5 mb-lg-0">
-                    <h6 class="text-danger fw-bold text-uppercase tracking-wide">Kemampuan AI</h6>
-                    <h2 class="fw-bold text-dark mb-4">Apa saja yang bisa ditanyakan?</h2>
-                    <p class="text-muted mb-4">Sistem AI kami telah dilatih untuk menguasai seluruh isi pedoman. Anda
-                        bisa menanyakan berbagai macam topik dengan bahasa kasual sehari-hari.</p>
-                    <a href="/chat" class="btn btn-outline-danger rounded-pill px-4 py-2 fw-bold">Coba Sendiri Sekarang
-                        <i class="fa-solid fa-arrow-right ms-2"></i></a>
-                </div>
-                <div class="col-lg-7">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <div class="prompt-card">
-                                <div class="prompt-icon"><i class="fa-solid fa-list-check"></i></div>
-                                <div>
-                                    <h6 class="fw-bold mb-1">Syarat & Ketentuan</h6>
-                                    <small class="text-muted">"Syarat daftar KP apa aja?"</small>
-                                </div>
-                            </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fa-solid fa-book-open-reader"></i></div>
+                            <div><span class="stat-number">TA</span><span class="stat-label">Layanan Tugas Akhir</span></div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="prompt-card">
-                                <div class="prompt-icon"><i class="fa-solid fa-route"></i></div>
-                                <div>
-                                    <h6 class="fw-bold mb-1">Alur Pendaftaran</h6>
-                                    <small class="text-muted">"Gimana langkah-langkahnya?"</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="prompt-card">
-                                <div class="prompt-icon"><i class="fa-solid fa-file-pdf"></i></div>
-                                <div>
-                                    <h6 class="fw-bold mb-1">Format Laporan</h6>
-                                    <small class="text-muted">"Aturan nulis laporannya gimana?"</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="prompt-card">
-                                <div class="prompt-icon"><i class="fa-solid fa-user-tie"></i></div>
-                                <div>
-                                    <h6 class="fw-bold mb-1">Dosen Pembimbing</h6>
-                                    <small class="text-muted">"Cara dapet dosen pembimbing?"</small>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fa-solid fa-comments"></i></div>
+                            <div><span class="stat-number">24/7</span><span class="stat-label">Akses konsultasi kapan saja</span></div>
                         </div>
                     </div>
                 </div>
@@ -541,108 +1864,341 @@
         </div>
     </section>
 
-    <section id="links" class="py-5 bg-light">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h6 class="text-danger fw-bold text-uppercase">Akses Cepat</h6>
-                <h2 class="fw-bold text-dark">Tautan Terkait KP</h2>
-                <p class="text-muted">Kumpulan tautan formulir, aplikasi, dan panduan resmi Kerja Praktik.</p>
-            </div>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-3">
-                    <a href="https://linktr.ee/laa.upps.sby" target="_blank" class="link-card">
-                        <div class="link-icon"><i class="fa-solid fa-pen-to-square"></i></div>
-                        <div>
-                            <h6 class="fw-bold mb-1">Form Pengajuan KP</h6>
-                            <small class="text-muted d-block">linktr.ee/laa.upps.sby</small>
-                        </div>
-                    </a>
+    <main>
+        <section class="section-space" id="layanan">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <span class="section-kicker">Layanan SSC</span>
+                    <h2 class="section-title">Dua fokus utama untuk menemani perjalanan akademikmu.</h2>
+                    <p class="section-copy">
+                        Mulai dari persiapan hingga penyelesaian, SSC Smart Assistant membantu mahasiswa memahami
+                        kebutuhan Kerja Praktik dan Tugas Akhir dengan cara yang lebih ringkas dan mudah diikuti.
+                    </p>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <a href="https://toss.telkomuniversity.ac.id" target="_blank" class="link-card">
-                        <div class="link-icon"><i class="fa-solid fa-globe"></i></div>
-                        <div>
-                            <h6 class="fw-bold mb-1">Portal TOSS</h6>
-                            <small class="text-muted d-block">Aplikasi Pengajuan TOSS</small>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <a href="https://tel-u.ac.id/tutorialmengajukanditoss" target="_blank" class="link-card">
-                        <div class="link-icon"><i class="fa-solid fa-laptop-file"></i></div>
-                        <div>
-                            <h6 class="fw-bold mb-1">Tutorial TOSS</h6>
-                            <small class="text-muted d-block">Cara pengajuan surat pengantar</small>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <a href="https://tel-u.ac.id/panduankpsi" target="_blank" class="link-card">
-                        <div class="link-icon"><i class="fa-solid fa-book"></i></div>
-                        <div>
-                            <h6 class="fw-bold mb-1">Buku Panduan KP</h6>
-                            <small class="text-muted d-block">Download panduan resmi</small>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section id="faq" class="py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="text-center mb-5">
-                        <h6 class="text-danger fw-bold text-uppercase">Bantuan Cepat</h6>
-                        <h3 class="fw-bold">Pertanyaan Populer</h3>
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <a href="/chat" class="focus-card focus-kp d-block" aria-label="Tanya tentang Kerja Praktik">
+                            <span class="focus-number">01</span>
+                            <div class="focus-icon"><i class="fa-solid fa-briefcase"></i></div>
+                            <div class="focus-content">
+                                <h3>Kerja Praktik</h3>
+                                <p>
+                                    Temukan arahan untuk persiapan, pengajuan, pelaksanaan, pembimbingan,
+                                    pelaporan, hingga penyelesaian Kerja Praktik.
+                                </p>
+                            </div>
+                            <span class="focus-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                        </a>
                     </div>
+
+                    <div class="col-lg-6">
+                        <a href="/chat" class="focus-card focus-ta d-block" aria-label="Tanya tentang Tugas Akhir">
+                            <span class="focus-number">02</span>
+                            <div class="focus-icon"><i class="fa-solid fa-book-open-reader"></i></div>
+                            <div class="focus-content">
+                                <h3>Tugas Akhir</h3>
+                                <p>
+                                    Dapatkan arahan awal mengenai proposal, bimbingan, seminar, sidang,
+                                    serta tahapan penting dalam menyelesaikan Tugas Akhir.
+                                </p>
+                            </div>
+                            <span class="focus-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-space pt-0">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <article class="service-card service-kp">
+                            <div class="service-icon"><i class="fa-solid fa-route"></i></div>
+                            <h4>Kerja Praktik lebih terarah</h4>
+                            <p>
+                                Gunakan SSC untuk memahami apa yang perlu disiapkan, tahapan yang perlu dilalui,
+                                serta pertanyaan umum yang sering muncul selama proses Kerja Praktik.
+                            </p>
+                        </article>
+                    </div>
+                    <div class="col-md-6">
+                        <article class="service-card service-ta">
+                            <div class="service-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <h4>Tugas Akhir lebih terencana</h4>
+                            <p>
+                                Gunakan SSC untuk memperoleh gambaran tentang perjalanan Tugas Akhir, dari
+                                perencanaan topik hingga persiapan tahap akhir.
+                            </p>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="info-band">
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="info-band-item">
+                                <div class="info-band-icon"><i class="fa-solid fa-circle-question"></i></div>
+                                <div>
+                                    <h6>Apa yang bisa ditanyakan?</h6>
+                                    <p>Persyaratan, alur, pengajuan, bimbingan, laporan, seminar, dan proses penting lainnya.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="info-band-item">
+                                <div class="info-band-icon"><i class="fa-solid fa-comment-dots"></i></div>
+                                <div>
+                                    <h6>Bagaimana cara bertanya?</h6>
+                                    <p>Sebutkan layanan yang kamu butuhkan, lalu tanyakan bagian proses yang ingin dipahami.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="info-band-item">
+                                <div class="info-band-icon"><i class="fa-solid fa-compass"></i></div>
+                                <div>
+                                    <h6>Mulai dari mana?</h6>
+                                    <p>Buka asisten, pilih topik Kerja Praktik atau Tugas Akhir, lalu sampaikan kebutuhanmu.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="visual-section section-space" id="cara-kerja">
+            <div class="container position-relative" style="z-index:1;">
+                <div class="text-center mb-5">
+                    <span class="section-kicker">Cara kerja SSC</span>
+                    <h2 class="section-title">Cukup tanyakan kebutuhanmu, SSC membantu memberi arah.</h2>
+                    <p class="section-copy">
+                        Kamu tidak perlu memulai dari istilah yang rumit. Jelaskan kebutuhanmu secara sederhana,
+                        lalu asisten membantu mengarahkan pembahasan sesuai layanan yang kamu pilih.
+                    </p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-4">
+                        <article class="ssc-step">
+                            <div class="ssc-step-number">01</div>
+                            <h4>Pilih layanan</h4>
+                            <p>Mulai dengan menyebutkan apakah pertanyaanmu berkaitan dengan Kerja Praktik atau Tugas Akhir.</p>
+                        </article>
+                    </div>
+                    <div class="col-lg-4">
+                        <article class="ssc-step">
+                            <div class="ssc-step-number">02</div>
+                            <h4>Sampaikan kebutuhan</h4>
+                            <p>Tanyakan bagian yang ingin kamu pahami, misalnya pengajuan, bimbingan, laporan, seminar, atau sidang.</p>
+                        </article>
+                    </div>
+                    <div class="col-lg-4">
+                        <article class="ssc-step">
+                            <div class="ssc-step-number">03</div>
+                            <h4>Dapatkan arahan awal</h4>
+                            <p>SSC Smart Assistant membantu memberi penjelasan yang lebih jelas agar kamu bisa melanjutkan proses dengan percaya diri.</p>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="focus-note">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>
+                        Agar jawaban semakin tepat, sebutkan layanan dan bagian proses yang ingin kamu tanyakan.
+                        Contoh: “Bagaimana proses pengajuan Kerja Praktik?” atau “Apa persiapan seminar proposal Tugas Akhir?”
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-space pt-0">
+            <div class="container">
+                <div class="row g-4 align-items-stretch">
+                    <div class="col-lg-6">
+                        <div class="ai-preview">
+                            <div class="ai-preview-top">
+                                <div class="ai-profile">
+                                    <div class="ai-avatar"><i class="fa-solid fa-robot"></i></div>
+                                    <div>
+                                        <h5>SSC Smart Assistant</h5>
+                                        <p>Student Service Center · Telkom University Surabaya</p>
+                                    </div>
+                                </div>
+                                <span class="ai-live">Online</span>
+                            </div>
+
+                            <div class="chat-mini user">“Saya ingin mulai Kerja Praktik, apa yang perlu saya siapkan?”</div>
+                            <div class="chat-mini bot">
+                                Tentu. Saya bisa membantu menjelaskan persiapan awal, alur pengajuan, serta hal-hal yang perlu kamu perhatikan selama proses Kerja Praktik.
+                                <span class="mini-source"><i class="fa-solid fa-circle-check"></i>SSC siap membantu mengarahkan pertanyaanmu</span>
+                            </div>
+
+                            <div class="chat-mini user">“Bagaimana persiapan seminar proposal Tugas Akhir?”</div>
+                            <div class="chat-mini bot">
+                                Saya bisa membantu menjelaskan hal-hal yang perlu kamu pahami sebelum masuk ke tahap seminar proposal. Sebutkan bagian yang paling ingin kamu tanyakan ya.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="question-panel">
+                            <span class="section-kicker">Mulai dari pertanyaanmu</span>
+                            <h3>Apa yang ingin kamu selesaikan hari ini?</h3>
+                            <p>Gunakan contoh berikut untuk mulai berkonsultasi dengan SSC Smart Assistant.</p>
+                            <a href="/chat" class="question-item"><span><i class="fa-solid fa-briefcase"></i></span>Apa saja yang perlu disiapkan untuk Kerja Praktik?</a>
+                            <a href="/chat" class="question-item"><span><i class="fa-solid fa-file-signature"></i></span>Bagaimana alur pengajuan Kerja Praktik?</a>
+                            <a href="/chat" class="question-item"><span><i class="fa-solid fa-book-open-reader"></i></span>Bagaimana persiapan proposal Tugas Akhir?</a>
+                            <a href="/chat" class="question-item"><span><i class="fa-solid fa-chalkboard-user"></i></span>Apa yang perlu diperhatikan saat bimbingan Tugas Akhir?</a>
+                            <a href="/chat" class="question-item"><span><i class="fa-solid fa-circle-question"></i></span>Bagaimana saya memulai pertanyaan di SSC?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-space bg-white" id="faq">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <span class="section-kicker">Bantuan cepat</span>
+                    <h2 class="section-title">Pertanyaan populer seputar Kerja Praktik dan Tugas Akhir.</h2>
+                    <p class="section-copy">
+                        Gunakan SSC Smart Assistant untuk memperoleh arahan lebih spesifik sesuai kebutuhanmu.
+                    </p>
+                </div>
+
+                <div class="faq-wrap">
                     <div class="accordion" id="faqAccordion">
                         <div class="accordion-item">
-                            <h2 class="accordion-header"><button class="accordion-button" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#faq1">Berapa minimal SKS untuk bisa
-                                    mengajukan Kerja Praktik?</button></h2>
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    Apa saja yang bisa saya tanyakan tentang Kerja Praktik?
+                                </button>
+                            </h2>
                             <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body text-muted">Syarat minimal SKS merujuk pada pedoman angkatan.
-                                    Tanyakan pada asisten virtual kami untuk mendapatkan rincian syarat akademik secara
-                                    instan.</div>
+                                <div class="accordion-body">
+                                    Kamu dapat menanyakan persiapan, pengajuan, pelaksanaan, pembimbingan, laporan, hingga tahapan penyelesaian Kerja Praktik.
+                                </div>
                             </div>
                         </div>
+
                         <div class="accordion-item">
-                            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#faq2">Bagaimana alur pengajuan Proposal
-                                    KP?</button></h2>
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    Apa saja yang bisa saya tanyakan tentang Tugas Akhir?
+                                </button>
+                            </h2>
                             <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body text-muted">Mulai dari persetujuan dosen wali hingga
-                                    pencetakan surat pengantar dari kampus, asisten virtual kami siap memandu Anda
-                                    langkah demi langkah.</div>
+                                <div class="accordion-body">
+                                    Kamu dapat bertanya mengenai persiapan proposal, bimbingan, seminar, sidang, penyusunan laporan, dan tahapan penting Tugas Akhir lainnya.
+                                </div>
                             </div>
                         </div>
+
                         <div class="accordion-item">
-                            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#faq3">Apa format laporan akhir yang harus
-                                    dikumpulkan?</button></h2>
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    Bagaimana agar pertanyaan saya lebih mudah dipahami?
+                                </button>
+                            </h2>
                             <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body text-muted">Format penulisan, batas margin, hingga lembar
-                                    pengesahan semuanya telah tertulis di pedoman. Asisten cerdas kami dapat
-                                    merangkumkannya untuk Anda secara instan.</div>
+                                <div class="accordion-body">
+                                    Sebutkan layanan yang kamu pilih dan bagian proses yang ingin diketahui. Contohnya, “Bagaimana pengajuan KP?” atau “Apa persiapan sidang TA?”
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    Bagaimana jika saya masih membutuhkan bantuan lanjutan?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Gunakan SSC sebagai titik awal untuk memahami proses. Untuk kebutuhan yang memerlukan penanganan lebih lanjut, kamu dapat melanjutkan melalui unit layanan terkait.
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer class="bg-white text-center py-4 border-top mt-auto">
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-card">
+                    <div class="cta-content">
+                        <span class="hero-label"><span class="status-dot"></span>SSC Smart siap membantu</span>
+                        <h2>Mulai Kerja Praktik dan Tugas Akhirmu dengan lebih percaya diri.</h2>
+                        <p>
+                            Ketika kamu butuh arahan awal, SSC Smart Assistant siap menjadi teman digital untuk membantu
+                            memahami langkah yang perlu kamu ambil.
+                        </p>
+                        <a href="/chat" class="btn-primary-ssc"><i class="fa-solid fa-comments"></i>Buka Asisten Virtual</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
         <div class="container">
-            <p class="mb-0 text-muted small fw-semibold">&copy; 2026 SSC Smart Internship - Telkom University Surabaya.
-            </p>
+            <div class="row g-5">
+                <div class="col-lg-5">
+                    <a class="footer-brand" href="#beranda">
+                        <i class="fa-solid fa-graduation-cap me-2 text-danger"></i>Student Service Center
+                    </a>
+                    <p class="footer-copy">
+                        Layanan digital Student Service Center yang membantu mahasiswa memperoleh arahan awal seputar Kerja Praktik dan Tugas Akhir.
+                    </p>
+                    <div class="socials mt-4">
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-2">
+                    <div class="footer-title">Navigasi</div>
+                    <div class="footer-links">
+                        <a href="#beranda">Beranda</a>
+                        <a href="#layanan">Layanan</a>
+                        <a href="#cara-kerja">Cara Kerja</a>
+                        <a href="#faq">FAQ</a>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-2">
+                    <div class="footer-title">Layanan</div>
+                    <div class="footer-links">
+                        <a href="/chat">Kerja Praktik</a>
+                        <a href="/chat">Tugas Akhir</a>
+                        <a href="/chat">Tanya Asisten</a>
+                        <a href="/admin/login">Admin Workspace</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="footer-title">Student Service Center</div>
+                    <div class="footer-links">
+                        <a href="#">Telkom University Surabaya</a>
+                        <a href="/chat"><i class="fa-solid fa-robot me-2"></i>Asisten Virtual SSC</a>
+                        <a href="#"><i class="fa-solid fa-clock me-2"></i>Layanan digital 24/7</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between gap-2">
+                <span>© 2026 SSC Smart Assistant · Telkom University Surabaya</span>
+                <span>Prototype layanan informasi mahasiswa berbasis AI</span>
+            </div>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,42 @@
+[
+  {
+    "filename": "Buku_pedoman_kerja_praktik.pdf",
+    "title": "Buku pedoman kerja praktik",
+    "category": "Kerja Praktik",
+    "uploaded_at": "2026-06-23T01:00:22.118816",
+    "updated_at": "2026-06-23T01:00:22.126854",
+    "status": "active",
+    "document_type": "pedoman",
+    "document_type_label": "Pedoman PDF"
+  },
+  {
+    "filename": "Pedoman_Tugas_Akhir.pdf",
+    "title": "Pedoman Tugas Akhir",
+    "category": "Tugas Akhir",
+    "uploaded_at": "2026-06-22T21:03:52.773080",
+    "updated_at": "2026-06-22T21:03:52.773155",
+    "status": "active",
+    "document_type": "pedoman",
+    "document_type_label": "Pedoman PDF"
+  },
+  {
+    "filename": "Template_Buku_Tugas_Akhir.docx",
+    "title": "Template Buku Tugas Akhir",
+    "category": "Tugas Akhir",
+    "document_type": "template",
+    "document_type_label": "Template Word",
+    "uploaded_at": "2026-06-28T15:32:26.386339",
+    "updated_at": "2026-06-28T15:33:56.223478",
+    "status": "active"
+  },
+  {
+    "filename": "Template_Proposal_Kerja_Praktik.docx",
+    "title": "Template Proposal Kerja Praktik",
+    "category": "Kerja Praktik",
+    "document_type": "template",
+    "document_type_label": "Template Word",
+    "uploaded_at": "2026-06-28T15:36:32.619120",
+    "updated_at": "2026-06-28T15:36:32.626119",
+    "status": "active"
+  }
+]

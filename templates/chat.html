@@ -4,323 +4,1641 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tanya Asisten - SSC Smart Internship</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <meta name="description"
+        content="Student Service Center Telkom University Surabaya untuk membantu kebutuhan informasi mahasiswa.">
+    <title>Tanya Asisten | Student Service Center</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <style>
         :root {
-            --telkom-red: #CC0000;
-            --telkom-dark-red: #8b0000;
-            --cream-white: #FDFDFD;
-            --glass-bg: rgba(255, 255, 255, 0.85);
-            --glass-border: rgba(255, 255, 255, 0.3);
-            --text-main: #2C3E50;
-            --chat-bg: #f4f7f6;
+            --red: #d71920;
+            --red-dark: #980d15;
+            --wine: #51070d;
+            --ink: #182131;
+            --muted: #667287;
+            --soft: #f5f7fb;
+            --surface: #ffffff;
+            --line: rgba(24, 33, 49, .10);
+            --green: #16a36f;
+            --navy: #182534;
+            --shadow-lg: 0 24px 64px rgba(18, 25, 38, .12);
+            --shadow-md: 0 14px 36px rgba(18, 25, 38, .08);
         }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            background-color: var(--cream-white);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--text-main);
-            height: 100vh;
+            min-height: 100vh;
+            margin: 0;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 90% 12%, rgba(215, 25, 32, .07), transparent 22%),
+                radial-gradient(circle at 8% 85%, rgba(143, 13, 20, .05), transparent 24%),
+                linear-gradient(180deg, #f8fafc 0%, #f2f5fa 100%);
+            font-family: "DM Sans", Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            opacity: .10;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg fill='none' stroke='%23b90f18' stroke-width='1.2'%3E%3Cpath d='M130 24C95 55 95 105 130 130C165 105 165 55 130 24Z'/%3E%3Cpath d='M236 130C205 95 155 95 130 130C155 165 205 165 236 130Z'/%3E%3Cpath d='M130 236C165 205 165 155 130 130C95 155 95 205 130 236Z'/%3E%3Cpath d='M24 130C55 165 105 165 130 130C105 95 55 95 24 130Z'/%3E%3Ccircle cx='130' cy='130' r='5'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 260px 260px;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,.6), transparent 72%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,.6), transparent 72%);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Outfit", Arial, sans-serif;
+            letter-spacing: -0.03em;
+        }
+
+        a { text-decoration: none; }
+
+        /* NAVIGATION */
+        .main-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1100;
+            min-height: 82px;
+            background: rgba(255, 255, 255, .91);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255, 255, 255, .95);
+            box-shadow: 0 8px 24px rgba(18, 25, 38, .05);
+        }
+
+        .brand-mark {
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 11px;
+            border-radius: 14px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--red), var(--wine));
+            box-shadow: 0 8px 18px rgba(215, 25, 32, .22);
+        }
+
+        .navbar-brand {
             display: flex;
-            flex-direction: column;
-            overflow: hidden;
+            align-items: center;
+            color: var(--ink) !important;
+            font-family: "Outfit", sans-serif;
+            font-size: 1.08rem;
+            font-weight: 800;
         }
 
-        /* Navigasi Premium */
-        .navbar-custom {
-            background-color: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--glass-border);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-            z-index: 1000;
-        }
-
-        .navbar-custom .navbar-brand,
-        .navbar-custom .nav-link {
-            color: var(--telkom-red) !important;
+        .brand-subtitle {
+            display: block;
+            margin-top: 1px;
+            color: var(--muted);
+            font-family: "DM Sans", sans-serif;
+            font-size: .64rem;
             font-weight: 700;
-            transition: all 0.3s ease;
+            letter-spacing: .10em;
+            text-transform: uppercase;
         }
 
-        .navbar-custom .nav-link:hover {
-            color: var(--telkom-dark-red) !important;
+        .navbar-nav .nav-link {
+            position: relative;
+            color: #3e4a5f !important;
+            padding: 10px 13px !important;
+            font-size: .91rem;
+            font-weight: 700;
+            transition: color .2s ease, transform .2s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--red) !important;
+            transform: translateY(-1px);
+        }
+
+        .navbar-nav .nav-link.active {
+            color: var(--red) !important;
+        }
+
+        .navbar-nav .nav-link.active::after {
+            content: "";
+            position: absolute;
+            right: 13px;
+            bottom: 4px;
+            left: 13px;
+            height: 2px;
+            border-radius: 999px;
+            background: var(--red);
+        }
+
+        .nav-admin {
+            display: inline-flex !important;
+            align-items: center;
+            margin-left: 8px;
+            padding: 10px 16px !important;
+            border: 1px solid rgba(215, 25, 32, .22);
+            border-radius: 999px;
+            color: var(--red) !important;
+            background: rgba(215, 25, 32, .06);
+        }
+
+        .navbar-nav .nav-link.nav-admin:hover {
+            color: #ffffff !important;
+            border-color: rgba(255, 255, 255, 0.85) !important;
+            background: linear-gradient(135deg, var(--red), var(--wine));
+            box-shadow: 0 10px 20px rgba(215, 25, 32, 0.25);
             transform: translateY(-2px);
         }
 
-        /* Chat Container Modern */
-        .chat-wrapper {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            background: radial-gradient(circle at center, var(--cream-white) 0%, #eef2f5 100%);
+        .navbar-toggler {
+            border: 0;
+            box-shadow: none !important;
         }
 
-        .chat-card {
+        /* CHAT SHELL */
+        .chat-page {
+            min-height: calc(100vh - 82px);
+            display: flex;
+            align-items: center;
+            padding: 30px 0;
+        }
+
+        .chat-shell {
+            position: relative;
             width: 100%;
-            max-width: 1000px;
-            height: 100%;
-            max-height: 85vh;
-            background: white;
-            border-radius: 24px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-            display: flex;
-            flex-direction: column;
+            min-height: min(760px, calc(100vh - 142px));
+            height: min(760px, calc(100vh - 142px));
             overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,.78);
+            border-radius: 30px;
+            background: rgba(255,255,255,.86);
+            box-shadow: var(--shadow-lg);
         }
 
-        /* ===== BATIK DI HEADER ===== */
-        .chat-header {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M20 20c0-11.046 8.954-20 20-20v20H20zM0 20c11.046 0 20-8.954 20-20v20H0zM0 40c0-11.046 8.954-20 20-20v20H0zM20 40c11.046 0 20-8.954 20-20v20H20z' fill='%23ffffff' fill-opacity='0.12' fill-rule='evenodd'/%3E%3C/svg%3E"), linear-gradient(135deg, var(--telkom-red) 0%, var(--telkom-dark-red) 100%);
-            background-size: 40px 40px, auto;
-            padding: 20px 30px;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            z-index: 2;
-        }
-
-        .ai-avatar-header {
-            width: 50px;
-            height: 50px;
-            background: white;
-            color: var(--telkom-red);
+        .chat-shell::before {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            top: -260px;
+            right: -210px;
+            width: 560px;
+            height: 560px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            background: rgba(215,25,32,.07);
+            filter: blur(15px);
         }
 
-        /* Ruang Obrolan */
+        .chat-layout {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            height: 100%;
+            min-height: 0;
+        }
+
+        .chat-sidebar {
+            width: 285px;
+            flex: 0 0 285px;
+            padding: 26px 22px;
+            border-right: 1px solid var(--line);
+            background:
+                linear-gradient(180deg, rgba(255,255,255,.92), rgba(250,251,253,.94));
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin-bottom: 28px;
+        }
+
+        .sidebar-brand-icon {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            border-radius: 13px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--red), var(--wine));
+            box-shadow: 0 9px 18px rgba(215,25,32,.20);
+        }
+
+        .sidebar-brand h6 {
+            margin: 0 0 3px;
+            font-size: .95rem;
+            font-weight: 800;
+        }
+
+        .sidebar-brand p {
+            margin: 0;
+            color: var(--muted);
+            font-size: .72rem;
+            font-weight: 700;
+        }
+
+        .sidebar-kicker {
+            margin: 0 0 11px;
+            color: var(--muted);
+            font-size: .70rem;
+            font-weight: 800;
+            letter-spacing: .09em;
+            text-transform: uppercase;
+        }
+
+        .quick-question {
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 9px 0;
+            padding: 12px;
+            border: 1px solid rgba(24,33,49,.07);
+            border-radius: 14px;
+            color: var(--ink);
+            background: #fff;
+            text-align: left;
+            font-family: "DM Sans", sans-serif;
+            font-size: .81rem;
+            font-weight: 700;
+            line-height: 1.45;
+            transition: transform .2s ease, border .2s ease, box-shadow .2s ease;
+        }
+
+        .quick-question:hover {
+            transform: translateX(4px);
+            border-color: rgba(215,25,32,.30);
+            box-shadow: 0 10px 18px rgba(215,25,32,.07);
+        }
+
+        .quick-question i {
+            width: 28px;
+            height: 28px;
+            flex: 0 0 28px;
+            display: grid;
+            place-items: center;
+            border-radius: 9px;
+            color: var(--red);
+            background: rgba(215,25,32,.09);
+        }
+
+        .sidebar-guide {
+            margin-top: 26px;
+            padding: 15px;
+            border: 1px solid rgba(215,25,32,.12);
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(215,25,32,.06), rgba(255,255,255,.95));
+        }
+
+        .sidebar-guide-icon {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 10px;
+            border-radius: 11px;
+            color: var(--red);
+            background: #fff;
+        }
+
+        .sidebar-guide h6 {
+            margin: 0 0 6px;
+            font-size: .85rem;
+            font-weight: 800;
+        }
+
+        .sidebar-guide p {
+            margin: 0;
+            color: var(--muted);
+            font-size: .75rem;
+            line-height: 1.58;
+        }
+
+        .chat-main {
+            min-width: 0;
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            position: relative;
+            min-height: 112px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 21px 28px;
+            overflow: hidden;
+            color: #fff;
+            background:
+                radial-gradient(circle at 90% 20%, rgba(255,224,173,.18), transparent 28%),
+                linear-gradient(125deg, #54070d 0%, #9c0e16 58%, #d71920 100%);
+        }
+
+        .chat-header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: .26;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='210' height='210' viewBox='0 0 210 210'%3E%3Cg fill='none' stroke='%23ffe8c6' stroke-width='1.4'%3E%3Cpath d='M105 21C77 47 77 83 105 105C133 83 133 47 105 21Z'/%3E%3Cpath d='M189 105C163 77 127 77 105 105C127 133 163 133 189 105Z'/%3E%3Cpath d='M105 189C133 163 133 127 105 105C77 127 77 163 105 189Z'/%3E%3Cpath d='M21 105C47 133 83 133 105 105C83 77 47 77 21 105Z'/%3E%3Ccircle cx='105' cy='105' r='5'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 210px 210px;
+            animation: batikDrift 46s linear infinite;
+        }
+
+        @keyframes batikDrift {
+            from { background-position: 0 0; }
+            to { background-position: -210px 210px; }
+        }
+
+        .assistant-profile,
+        .header-meta {
+            position: relative;
+            z-index: 1;
+        }
+
+        .assistant-profile {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .assistant-avatar {
+            width: 56px;
+            height: 56px;
+            flex: 0 0 56px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 18px;
+            color: var(--red);
+            background: #fff;
+            box-shadow: 0 8px 16px rgba(0,0,0,.16);
+            font-size: 1.38rem;
+        }
+
+        .assistant-profile h4 {
+            margin: 0 0 5px;
+            font-size: 1.32rem;
+            font-weight: 800;
+        }
+
+        .assistant-profile p {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            margin: 0;
+            color: rgba(255,255,255,.86);
+            font-size: .81rem;
+            font-weight: 600;
+        }
+
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #7cf0aa;
+            box-shadow: 0 0 0 5px rgba(124,240,170,.16);
+        }
+
+        .header-meta {
+            padding: 11px 13px;
+            border: 1px solid rgba(255,255,255,.18);
+            border-radius: 14px;
+            color: rgba(255,255,255,.94);
+            background: rgba(255,255,255,.09);
+            backdrop-filter: blur(8px);
+            font-size: .75rem;
+            font-weight: 700;
+        }
+
+        .header-meta i { color: #ffe8ae; }
+
         .chat-body {
             flex: 1;
+            min-height: 0;
             overflow-y: auto;
-            padding: 30px;
-            background-color: var(--chat-bg);
+            padding: 26px 28px 16px;
+            background:
+                linear-gradient(180deg, rgba(249,250,252,.68), rgba(243,246,249,.93)),
+                radial-gradient(circle at 15% 8%, rgba(215,25,32,.04), transparent 22%);
             scroll-behavior: smooth;
+        }
+
+        .chat-body::-webkit-scrollbar { width: 7px; }
+        .chat-body::-webkit-scrollbar-track { background: transparent; }
+        .chat-body::-webkit-scrollbar-thumb { border-radius: 99px; background: rgba(24,33,49,.15); }
+        .chat-body::-webkit-scrollbar-thumb:hover { background: rgba(24,33,49,.28); }
+
+        .date-divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 0 22px;
+            color: var(--muted);
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+        }
+
+        .date-divider::before,
+        .date-divider::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+            background: rgba(24,33,49,.08);
         }
 
         .msg-row {
             display: flex;
             align-items: flex-end;
-            margin-bottom: 25px;
-            gap: 12px;
-            animation: fadeIn 0.3s ease forwards;
+            gap: 11px;
+            margin-bottom: 20px;
+            animation: msgReveal .35s ease both;
         }
 
         .msg-row.user {
             flex-direction: row-reverse;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes msgReveal {
+            from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .avatar-sm {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 36px;
+            height: 36px;
+            flex: 0 0 36px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            box-shadow: 0 5px 12px rgba(18,25,38,.10);
+            font-size: .87rem;
         }
 
         .avatar-bot {
-            background-color: var(--telkom-red);
-            color: white;
+            color: #fff;
+            background: linear-gradient(135deg, var(--red), var(--wine));
         }
 
         .avatar-user {
-            background-color: #2C3E50;
-            color: white;
+            color: #fff;
+            background: var(--navy);
         }
 
-        /* Gelembung Obrolan */
+        .message-stack {
+            max-width: min(76%, 730px);
+        }
+
+        .msg-row.user .message-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
         .msg-bubble {
-            max-width: 75%;
-            padding: 15px 22px;
-            border-radius: 20px;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.03);
-            position: relative;
+            padding: 15px 17px;
+            border-radius: 18px;
+            font-size: .94rem;
+            line-height: 1.72;
+            word-break: break-word;
         }
 
         .msg-row.bot .msg-bubble {
-            background: white;
-            color: var(--text-main);
-            border-bottom-left-radius: 4px;
-            border: 1px solid rgba(0,0,0,0.03);
+            color: #3f4e63;
+            border: 1px solid rgba(24,33,49,.06);
+            border-bottom-left-radius: 5px;
+            background: #fff;
+            box-shadow: 0 8px 20px rgba(18,25,38,.045);
         }
 
-        /* ===== BATIK DI CHAT USER ===== */
         .msg-row.user .msg-bubble {
-            color: white;
-            border-bottom-right-radius: 4px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M20 20c0-11.046 8.954-20 20-20v20H20zM0 20c11.046 0 20-8.954 20-20v20H0zM0 40c0-11.046 8.954-20 20-20v20H0zM20 40c11.046 0 20-8.954 20-20v20H20z' fill='%23ffffff' fill-opacity='0.08' fill-rule='evenodd'/%3E%3C/svg%3E"), linear-gradient(135deg, #CC0000 0%, #8b0000 100%);
-            background-size: 30px 30px, auto;
+            color: #fff;
+            border-bottom-right-radius: 5px;
+            background:
+                linear-gradient(135deg, rgba(255,255,255,.08), transparent),
+                linear-gradient(135deg, var(--red), var(--wine));
+            box-shadow: 0 9px 20px rgba(151,13,21,.20);
         }
 
-        /* Area Input Ketik */
+        .message-time {
+            margin-top: 5px;
+            color: var(--muted);
+            font-size: .68rem;
+            font-weight: 700;
+        }
+
+        .msg-row.user .message-time { text-align: right; }
+
+        .msg-bubble .chat-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            margin: 4px 0 1px;
+            color: var(--red);
+            font-weight: 800;
+            text-decoration: none;
+            text-underline-offset: 3px;
+            word-break: break-word;
+        }
+
+        .msg-bubble .chat-link::after {
+            content: "";
+            position: absolute;
+        }
+
+        .msg-bubble .chat-link:hover {
+            color: var(--red-dark);
+            text-decoration: underline;
+        }
+
         .chat-footer {
-            padding: 20px 30px;
-            background: white;
-            border-top: 1px solid rgba(0,0,0,0.05);
-            z-index: 2;
+            padding: 17px 22px 19px;
+            border-top: 1px solid rgba(24,33,49,.07);
+            background: rgba(255,255,255,.94);
         }
 
-        .input-group-custom {
-            background: #f8f9fa;
-            border-radius: 50px;
-            padding: 5px 5px 5px 25px;
+        .input-shell {
             display: flex;
             align-items: center;
-            border: 1px solid rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
+            gap: 12px;
+            padding: 6px 7px 6px 17px;
+            border: 1px solid rgba(24,33,49,.10);
+            border-radius: 18px;
+            background: #f9fafc;
+            transition: border .2s ease, box-shadow .2s ease, background .2s ease;
         }
 
-        .input-group-custom:focus-within {
-            box-shadow: 0 0 0 4px rgba(204, 0, 0, 0.1);
-            border-color: rgba(204, 0, 0, 0.3);
-            background: white;
+        .input-shell:focus-within {
+            border-color: rgba(215,25,32,.42);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(215,25,32,.09);
         }
 
-        .input-group-custom input {
-            border: none;
+        .input-shell i {
+            color: var(--muted);
+            font-size: .93rem;
+        }
+
+        .input-shell input {
+            width: 100%;
+            min-width: 0;
+            border: 0;
+            outline: 0;
+            color: var(--ink);
             background: transparent;
-            box-shadow: none !important;
-            padding: 12px 0;
-            font-size: 1rem;
+            font-family: "DM Sans", sans-serif;
+            font-size: .94rem;
         }
 
-        /* ===== BATIK DI TOMBOL KIRIM ===== */
+        .input-shell input::placeholder { color: #9aa4b4; }
+
         .btn-send {
-            color: white;
-            border-radius: 50px !important;
             width: 45px;
             height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: none;
-            transition: transform 0.2s ease;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M20 20c0-11.046 8.954-20 20-20v20H20zM0 20c11.046 0 20-8.954 20-20v20H0zM0 40c0-11.046 8.954-20 20-20v20H0zM20 40c11.046 0 20-8.954 20-20v20H20z' fill='%23ffffff' fill-opacity='0.08' fill-rule='evenodd'/%3E%3C/svg%3E"), linear-gradient(135deg, #CC0000 0%, #8b0000 100%);
-            background-size: 30px 30px, auto;
+            flex: 0 0 45px;
+            display: grid;
+            place-items: center;
+            border: 0;
+            border-radius: 14px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--red), var(--wine));
+            box-shadow: 0 8px 16px rgba(215,25,32,.22);
+            transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
         }
 
         .btn-send:hover {
-            transform: scale(1.05);
-            filter: brightness(0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 22px rgba(215,25,32,.28);
+            filter: brightness(.98);
         }
 
-        /* Animasi Mengetik */
+        .btn-send:disabled { cursor: not-allowed; opacity: .64; transform: none; }
+
+        .input-helper {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            margin: 9px 3px 0;
+            color: var(--muted);
+            font-size: .72rem;
+            font-weight: 600;
+        }
+
+        .input-helper i { color: var(--green); }
+
         .typing-indicator {
             display: flex;
-            gap: 5px;
             align-items: center;
-            padding: 5px 10px;
+            gap: 5px;
+            min-height: 20px;
+            padding: 1px 3px;
+        }
+
+        .typing-text {
+            margin-right: 4px;
+            color: var(--muted);
+            font-size: .78rem;
+            font-weight: 700;
         }
 
         .dot {
-            width: 8px;
-            height: 8px;
-            background: #a9a9a9;
+            width: 7px;
+            height: 7px;
             border-radius: 50%;
-            animation: bounce 1.4s infinite ease-in-out both;
+            background: var(--red);
+            animation: typingBounce 1.25s infinite ease-in-out both;
         }
 
-        .dot:nth-child(1) { animation-delay: -0.32s; }
-        .dot:nth-child(2) { animation-delay: -0.16s; }
+        .dot:nth-child(2) { animation-delay: -.24s; }
+        .dot:nth-child(3) { animation-delay: -.12s; }
 
-        @keyframes bounce {
-            0%, 80%, 100% { transform: scale(0); opacity: 0.5;}
-            40% { transform: scale(1); opacity: 1;}
+        @keyframes typingBounce {
+            0%, 80%, 100% { transform: translateY(0); opacity: .35; }
+            40% { transform: translateY(-5px); opacity: 1; }
         }
 
-        /* Floating WA */
         .fab-wa {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background-color: #25D366;
-            color: white;
+            z-index: 1050;
+            right: 28px;
+            bottom: 28px;
+            width: 58px;
+            height: 58px;
+            display: grid;
+            place-items: center;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 1000;
-            text-decoration: none;
+            color: #fff;
+            background: #25D366;
+            box-shadow: 0 12px 25px rgba(37,211,102,.34);
+            font-size: 1.78rem;
+            transition: transform .25s ease, box-shadow .25s ease;
         }
 
         .fab-wa:hover {
-            transform: scale(1.1) rotate(-5deg);
-            color: white;
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+            color: #fff;
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 18px 30px rgba(37,211,102,.40);
         }
-        
+
         .fab-wa::before {
-            content: 'Bantuan Manusia';
+            content: "Bantuan manusia";
             position: absolute;
-            right: 75px;
-            background: white;
-            color: #333;
-            padding: 8px 15px;
+            right: 69px;
+            padding: 8px 11px;
             border-radius: 10px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            color: var(--ink);
+            background: #fff;
+            box-shadow: var(--shadow-md);
+            font-family: "DM Sans", sans-serif;
+            font-size: .75rem;
+            font-weight: 800;
+            white-space: nowrap;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transform: translateX(6px);
+            transition: opacity .2s ease, transform .2s ease;
+        }
+
+        .fab-wa:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        @media (max-width: 991.98px) {
+            .chat-page { padding: 22px 0; }
+            .chat-shell {
+                height: calc(100vh - 126px);
+                min-height: 620px;
+            }
+
+            .chat-sidebar { display: none; }
+            .chat-layout { display: block; }
+            .chat-main { height: 100%; }
+        }
+
+        @media (max-width: 767.98px) {
+            .main-nav { min-height: 72px; }
+            .navbar-collapse { padding: 13px 0 5px; }
+
+            .nav-admin {
+                display: inline-flex !important;
+                margin: 8px 0 0;
+            }
+
+            .chat-page {
+                min-height: calc(100vh - 72px);
+                padding: 0;
+            }
+
+            .chat-page .container { padding: 0; }
+
+            .chat-shell {
+                height: calc(100vh - 72px);
+                min-height: 560px;
+                border: 0;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            .chat-header { min-height: 100px; padding: 18px; }
+            .assistant-avatar { width: 48px; height: 48px; flex-basis: 48px; }
+            .assistant-profile h4 { font-size: 1.12rem; }
+            .header-meta { display: none; }
+
+            .chat-body { padding: 20px 15px 12px; }
+            .message-stack { max-width: 84%; }
+            .msg-bubble { padding: 13px 14px; font-size: .89rem; line-height: 1.65; }
+            .chat-footer { padding: 13px 15px 15px; }
+            .input-helper { display: none; }
+
+            .fab-wa {
+                right: 18px;
+                bottom: 18px;
+                width: 52px;
+                height: 52px;
+                font-size: 1.55rem;
+            }
+
+            .fab-wa::before { display: none; }
+        }
+
+        @media (max-width: 420px) {
+            .brand-subtitle { display: none; }
+            .navbar-brand { font-size: 1rem; }
+            .brand-mark { width: 38px; height: 38px; border-radius: 12px; }
+            .assistant-profile p { font-size: .73rem; }
+        }
+
+        /* CHAT HISTORY SIDEBAR */
+        .chat-sidebar {
+            width: 292px;
+            flex: 0 0 292px;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            padding: 20px 16px 16px;
+            border-right: 1px solid var(--line);
+            background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(249,250,253,.96));
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin-bottom: 0;
+            padding: 5px 6px 17px;
+            border-bottom: 1px solid rgba(24,33,49,.07);
+        }
+
+        .btn-new-chat {
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            margin: 17px 0;
+            padding: 12px 14px;
+            border: 1px solid rgba(215,25,32,.20);
+            border-radius: 14px;
+            color: var(--red);
+            background: rgba(215,25,32,.05);
+            font-family: "DM Sans", sans-serif;
+            font-size: .84rem;
+            font-weight: 800;
+            transition: transform .2s ease, color .2s ease, background .2s ease, box-shadow .2s ease;
+        }
+
+        .btn-new-chat:hover {
+            color: #fff;
+            border-color: var(--red);
+            background: linear-gradient(135deg, var(--red), var(--wine));
+            box-shadow: 0 10px 18px rgba(215,25,32,.20);
+            transform: translateY(-2px);
+        }
+
+        .sidebar-kicker {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 6px 10px;
+        }
+
+        .sidebar-count {
+            display: inline-grid;
+            place-items: center;
+            min-width: 22px;
+            height: 22px;
+            padding: 0 6px;
+            border-radius: 999px;
+            color: var(--red);
+            background: rgba(215,25,32,.08);
+            font-size: .68rem;
+        }
+
+        .history-list {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            padding: 2px 2px 9px;
+        }
+
+        .history-list::-webkit-scrollbar { width: 5px; }
+        .history-list::-webkit-scrollbar-track { background: transparent; }
+        .history-list::-webkit-scrollbar-thumb { border-radius: 99px; background: rgba(24,33,49,.14); }
+
+        .history-empty {
+            padding: 24px 12px;
+            color: var(--muted);
+            text-align: center;
+            font-size: .78rem;
+            line-height: 1.6;
+        }
+
+        .history-item {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 7px;
+            padding: 11px 38px 11px 11px;
+            border: 1px solid transparent;
+            border-radius: 13px;
+            color: var(--ink);
+            background: transparent;
+            text-align: left;
+            font-family: "DM Sans", sans-serif;
+            transition: transform .18s ease, border .18s ease, background .18s ease, box-shadow .18s ease;
+        }
+
+        .history-item:hover {
+            border-color: rgba(215,25,32,.13);
+            background: rgba(215,25,32,.045);
+            transform: translateX(2px);
+        }
+
+        .history-item.active {
+            border-color: rgba(215,25,32,.18);
+            background: linear-gradient(135deg, rgba(215,25,32,.09), rgba(255,255,255,.97));
+            box-shadow: 0 8px 16px rgba(215,25,32,.06);
+        }
+
+        .history-icon {
+            width: 31px;
+            height: 31px;
+            flex: 0 0 31px;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            color: var(--red);
+            background: rgba(215,25,32,.09);
+            font-size: .76rem;
+        }
+
+        .history-text { min-width: 0; display: block; }
+
+        .history-title {
+            display: block;
+            overflow: hidden;
+            color: inherit;
+            font-size: .80rem;
+            font-weight: 800;
+            line-height: 1.35;
+            text-overflow: ellipsis;
             white-space: nowrap;
         }
-        
-        .fab-wa:hover::before {
+
+        .history-time {
+            display: block;
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: .67rem;
+            font-weight: 700;
+        }
+
+        .history-delete {
+            position: absolute;
+            top: 50%;
+            right: 8px;
+            width: 28px;
+            height: 28px;
+            display: grid;
+            place-items: center;
+            border: 0;
+            border-radius: 9px;
+            color: #8994a6;
+            background: transparent;
+            font-size: .72rem;
+            opacity: 0;
+            transform: translateY(-50%);
+            transition: color .18s ease, background .18s ease, opacity .18s ease;
+        }
+
+        .history-item:hover .history-delete,
+        .history-item.active .history-delete { opacity: 1; }
+
+        .history-delete:hover {
+            color: #fff;
+            background: var(--red);
+        }
+
+        .sidebar-footnote {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin: 4px 3px 0;
+            padding: 12px 10px 2px;
+            border-top: 1px solid rgba(24,33,49,.07);
+            color: var(--muted);
+            font-size: .70rem;
+            font-weight: 600;
+            line-height: 1.55;
+        }
+
+        .sidebar-footnote i { margin-top: 2px; color: var(--red); }
+
+
+        @media (max-width: 991.98px) {
+            .chat-sidebar { display: none; }
+        }
+        /* ===== RIWAYAT OBROLAN: TOPIK OTOMATIS DAN WARNA ANIMASI ===== */
+
+        .history-item {
+            isolation: isolate;
+            overflow: hidden;
+            border-color: rgba(24,33,49,.06);
+            background: rgba(255,255,255,.74);
+        }
+
+        .history-item::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 4px;
+            border-radius: 13px 0 0 13px;
+            opacity: .92;
+            background: var(--tab-accent, var(--red));
+        }
+
+        .history-item:hover {
+            border-color: color-mix(in srgb, var(--tab-accent, var(--red)) 26%, transparent);
+            background: linear-gradient(115deg, var(--tab-soft, rgba(215,25,32,.09)), rgba(255,255,255,.97));
+            box-shadow: 0 3px 8px rgba(18,25,38,.07);
+            transform: translateX(1px);
+        }
+
+        .history-item.active {
+            color: #fff;
+            border-color: transparent;
+            background:
+                linear-gradient(112deg, var(--tab-start, #d71920), var(--tab-end, #7a0b12), var(--tab-start, #d71920));
+            background-size: 220% 100%;
+            box-shadow: 0 4px 10px rgba(24,33,49,.14);
+            animation: historyGradientFlow 5s ease infinite;
+            transform: none;
+        }
+
+        .history-item.active::before {
+            width: 100%;
+            border-radius: 13px;
+            opacity: .10;
+            background:
+                repeating-linear-gradient(45deg, rgba(255,255,255,.44) 0 2px, transparent 2px 8px);
+        }
+
+        .history-item.active .history-icon {
+            color: var(--tab-start, var(--red));
+            background: rgba(255,255,255,.94);
+            box-shadow: 0 4px 10px rgba(0,0,0,.12);
+        }
+
+        .history-item.active .history-title,
+        .history-item.active .history-time,
+        .history-item.active .history-delete {
+            color: #fff;
+        }
+
+        .history-item.active .history-time {
+            color: rgba(255,255,255,.78);
+        }
+
+        .history-item.active .history-delete:hover {
+            color: var(--tab-start, var(--red));
+            background: #fff;
+        }
+
+        .history-item.draft {
+            border-style: dashed;
+            border-color: rgba(24,33,49,.16);
+            background: #fbfcfe;
+        }
+
+        .history-item.draft .history-icon {
+            color: #79869a;
+            background: #eef2f7;
+        }
+
+        .history-item.draft.active {
+            color: #ffffff;
+            border-style: solid;
+            border-color: transparent;
+            background:
+                linear-gradient(
+                    112deg,
+                    var(--tab-start, #d71920),
+                    var(--tab-end, #7a0b12),
+                    var(--tab-start, #d71920)
+                );
+            background-size: 220% 100%;
+            box-shadow: 0 4px 10px rgba(24,33,49,.12);
+            animation: historyGradientFlow 5s ease infinite;
+        }
+
+        .history-item.draft.active .history-title,
+        .history-item.draft.active .history-delete {
+            color: #ffffff;
+        }
+
+        .history-item.draft.active .history-time {
+            color: rgba(255,255,255,.78);
+        }
+
+        .history-item.draft.active .history-icon {
+            color: var(--tab-start, var(--red));
+            background: rgba(255,255,255,.94);
+            box-shadow: 0 4px 10px rgba(0,0,0,.12);
+        }
+
+        .history-tone-0 {
+            --tab-accent: #d71920;
+            --tab-soft: rgba(215,25,32,.10);
+            --tab-start: #d71920;
+            --tab-end: #750a12;
+        }
+
+        .history-tone-1 {
+            --tab-accent: #7b3fc7;
+            --tab-soft: rgba(123,63,199,.10);
+            --tab-start: #8b45d4;
+            --tab-end: #482078;
+        }
+
+        .history-tone-2 {
+            --tab-accent: #0d8a73;
+            --tab-soft: rgba(13,138,115,.10);
+            --tab-start: #0e987e;
+            --tab-end: #075246;
+        }
+
+        .history-tone-3 {
+            --tab-accent: #c27709;
+            --tab-soft: rgba(194,119,9,.10);
+            --tab-start: #d88b14;
+            --tab-end: #855008;
+        }
+
+        .history-tone-4 {
+            --tab-accent: #2977bb;
+            --tab-soft: rgba(41,119,187,.10);
+            --tab-start: #2d86cf;
+            --tab-end: #16436b;
+        }
+
+        @keyframes historyGradientFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+    
+        /* ===== TAB OBROLAN: WARNA TETAP TERLIHAT SAAT DIAM ===== */
+        .sidebar-kicker.is-hidden {
+            display: none;
+        }
+
+        .history-list.is-empty {
+            display: block;
+        }
+
+        .empty-history {
+            margin-top: 15px;
+            padding: 18px 14px;
+            border: 1px dashed rgba(24,33,49,.14);
+            border-radius: 16px;
+            color: var(--muted);
+            background:
+                linear-gradient(135deg, rgba(215,25,32,.07), rgba(255,255,255,.72));
+            text-align: center;
+        }
+
+        .empty-history-icon {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 9px;
+            border-radius: 12px;
+            color: var(--red);
+            background: rgba(215,25,32,.11);
+        }
+
+        .empty-history strong {
+            display: block;
+            color: var(--ink);
+            font-size: .80rem;
+            font-weight: 800;
+        }
+
+        .empty-history span {
+            display: block;
+            margin-top: 5px;
+            font-size: .72rem;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .history-item {
+            border-color: color-mix(in srgb, var(--tab-accent, var(--red)) 16%, transparent);
+            background:
+                linear-gradient(112deg, var(--tab-soft, rgba(215,25,32,.11)), rgba(255,255,255,.86));
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,.42);
+        }
+
+        .history-item::before {
+            width: 5px;
             opacity: 1;
         }
 
-        .chat-body::-webkit-scrollbar { width: 6px; }
-        .chat-body::-webkit-scrollbar-track { background: transparent; }
-        .chat-body::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
-        .chat-body::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
+        .history-item:hover {
+            border-color: color-mix(in srgb, var(--tab-accent, var(--red)) 32%, transparent);
+            background:
+                linear-gradient(112deg, var(--tab-soft, rgba(215,25,32,.14)), rgba(255,255,255,.95));
+            box-shadow: 0 3px 8px rgba(18,25,38,.06);
+            transform: translateX(1px);
+        }
+
+        .history-item.active {
+            box-shadow: 0 4px 10px rgba(24,33,49,.12);
+        }
+
+    
+        /* Perbaikan: hover tidak boleh menimpa gradasi tab yang sedang aktif. */
+        .history-item.active:hover,
+        .history-item.draft.active:hover {
+            color: #ffffff;
+            border-color: transparent;
+            background:
+                linear-gradient(
+                    112deg,
+                    var(--tab-start, #d71920),
+                    var(--tab-end, #7a0b12),
+                    var(--tab-start, #d71920)
+                );
+            background-size: 220% 100%;
+            box-shadow: 0 4px 10px rgba(24,33,49,.12);
+            transform: none;
+        }
+
+        .history-item.active:hover .history-title,
+        .history-item.active:hover .history-time,
+        .history-item.active:hover .history-delete {
+            color: #ffffff;
+        }
+
+        .history-item.active:hover .history-time {
+            color: rgba(255,255,255,.78);
+        }
+
+        .history-item.active:hover .history-icon {
+            color: var(--tab-start, var(--red));
+            background: rgba(255,255,255,.94);
+        }
+
+            /* Perbaikan akhir: tab draft tidak pernah tampil putih polos. */
+        .history-item.draft:not(.active) {
+            border-style: solid;
+            border-color: color-mix(in srgb, var(--tab-accent, var(--red)) 20%, transparent);
+            background:
+                linear-gradient(112deg, var(--tab-soft, rgba(215,25,32,.12)), rgba(255,255,255,.88));
+        }
+
+        .history-item.draft:not(.active) .history-icon {
+            color: var(--tab-accent, var(--red));
+            background: color-mix(in srgb, var(--tab-accent, var(--red)) 12%, #ffffff);
+        }
+
+    
+        /* ===== STUDENT SERVICE CENTER BRAND ===== */
+        .brand-mark {
+            width: 48px;
+            height: 48px;
+            overflow: hidden;
+            border: 1px solid rgba(24, 33, 49, .08);
+            border-radius: 15px;
+            color: inherit;
+            background: #ffffff;
+            box-shadow: 0 10px 20px rgba(24, 33, 49, .08);
+        }
+
+        .brand-mark img {
+            width: 100%;
+            height: 100%;
+            padding: 4px;
+            object-fit: contain;
+        }
+
+        .ssc-brand-name {
+            display: block;
+            color: var(--ink);
+            font-family: "Outfit", Arial, sans-serif;
+            font-size: 1.10rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            line-height: 1.05;
+            white-space: nowrap;
+        }
+
+        .ssc-brand-name .ssc-s1,
+        .ssc-brand-name .ssc-s2,
+        .ssc-brand-name .ssc-c {
+            color: #7a43bb;
+        }
+
+        .assistant-avatar {
+            color: #7a43bb;
+        }
+
+        @media (max-width: 767.98px) {
+            .brand-mark {
+                width: 42px;
+                height: 42px;
+                margin-right: 10px;
+                border-radius: 13px;
+            }
+
+            .ssc-brand-name {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .ssc-brand-name {
+                font-size: .95rem;
+                white-space: normal;
+            }
+        }
+
+    
+        /* ===== PERBAIKAN TOMBOL HAPUS & POPUP KONFIRMASI ===== */
+        .history-delete,
+        .history-item.active .history-delete,
+        .history-item.active:hover .history-delete {
+            color: #6f1620 !important;
+        }
+
+        .history-delete i {
+            pointer-events: none;
+        }
+
+        .history-delete:hover,
+        .history-delete:focus-visible,
+        .history-item.active .history-delete:hover,
+        .history-item.active:hover .history-delete:hover {
+            color: #7d111b !important;
+            background: #ffdfe3 !important;
+            box-shadow: 0 0 0 3px rgba(255, 223, 227, .55);
+            outline: none;
+        }
+
+        .history-delete:focus-visible {
+            border: 1px solid rgba(152, 13, 21, .38);
+        }
+
+        body.delete-modal-open {
+            overflow: hidden;
+        }
+
+        .delete-confirm-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 2200;
+            display: grid;
+            place-items: center;
+            padding: 22px;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            background: rgba(18, 25, 38, .46);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: opacity .20s ease, visibility .20s ease;
+        }
+
+        .delete-confirm-modal.is-visible {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .delete-confirm-dialog {
+            width: min(100%, 430px);
+            position: relative;
+            padding: 26px;
+            border: 1px solid rgba(255, 255, 255, .82);
+            border-radius: 22px;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 92% 8%, rgba(215, 25, 32, .10), transparent 28%),
+                #ffffff;
+            box-shadow: 0 28px 70px rgba(18, 25, 38, .28);
+            transform: translateY(12px) scale(.98);
+            transition: transform .20s ease;
+        }
+
+        .delete-confirm-modal.is-visible .delete-confirm-dialog {
+            transform: translateY(0) scale(1);
+        }
+
+        .delete-confirm-close {
+            position: absolute;
+            top: 13px;
+            right: 13px;
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border: 0;
+            border-radius: 10px;
+            color: #6f1620;
+            background: #ffe9eb;
+            transition: transform .18s ease, background .18s ease;
+        }
+
+        .delete-confirm-close:hover,
+        .delete-confirm-close:focus-visible {
+            color: #7d111b;
+            background: #ffd7dc;
+            outline: none;
+            transform: rotate(4deg);
+        }
+
+        .delete-confirm-icon {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 15px;
+            border-radius: 15px;
+            color: #8c121d;
+            background: #ffe4e7;
+            font-size: 1.1rem;
+        }
+
+        .delete-confirm-dialog h5 {
+            margin: 0 32px 8px 0;
+            font-size: 1.18rem;
+            font-weight: 800;
+        }
+
+        .delete-confirm-dialog p {
+            margin: 0;
+            color: var(--muted);
+            font-size: .88rem;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+
+        .delete-confirm-topic {
+            display: block;
+            margin-top: 6px;
+            color: var(--ink);
+            font-weight: 800;
+            word-break: break-word;
+        }
+
+        .delete-confirm-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 23px;
+        }
+
+        .delete-confirm-actions button {
+            min-height: 42px;
+            border-radius: 12px;
+            padding: 0 15px;
+            font-family: "DM Sans", sans-serif;
+            font-size: .84rem;
+            font-weight: 800;
+            transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+        }
+
+        .btn-delete-cancel {
+            border: 1px solid rgba(24, 33, 49, .12);
+            color: var(--ink);
+            background: #f5f7fb;
+        }
+
+        .btn-delete-cancel:hover,
+        .btn-delete-cancel:focus-visible {
+            color: var(--ink);
+            border-color: rgba(24, 33, 49, .18);
+            background: #eaedf3;
+            outline: none;
+            transform: translateY(-1px);
+        }
+
+        .btn-delete-confirm {
+            border: 1px solid #8f101a;
+            color: #ffffff;
+            background: linear-gradient(135deg, #bf1822, #7d0f17);
+            box-shadow: 0 9px 18px rgba(152, 13, 21, .20);
+        }
+
+        .btn-delete-confirm:hover,
+        .btn-delete-confirm:focus-visible {
+            color: #ffffff;
+            border-color: #720d15;
+            background: linear-gradient(135deg, #a8121c, #650b12);
+            outline: none;
+            box-shadow: 0 12px 22px rgba(152, 13, 21, .27);
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 480px) {
+            .delete-confirm-dialog {
+                padding: 22px 18px 18px;
+                border-radius: 18px;
+            }
+
+            .delete-confirm-actions {
+                flex-direction: column-reverse;
+            }
+
+            .delete-confirm-actions button {
+                width: 100%;
+            }
+        }
+
+    
+        /* ===== KARTU DOKUMEN PDF DI DALAM CHAT ===== */
+        .document-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 10px;
+            padding: 12px;
+            border: 1px solid rgba(215, 25, 32, .13);
+            border-radius: 14px;
+            background: linear-gradient(135deg, #fffafb, #ffffff);
+            box-shadow: 0 7px 16px rgba(18, 25, 38, .045);
+        }
+
+        .document-card-icon {
+            width: 40px;
+            height: 40px;
+            flex: 0 0 40px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            color: #b20f19;
+            background: #ffe6e9;
+            font-size: 1rem;
+        }
+
+        .document-card-content {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .document-card-title {
+            display: block;
+            overflow: hidden;
+            color: var(--ink);
+            font-size: .80rem;
+            font-weight: 800;
+            line-height: 1.35;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .document-card-meta {
+            display: block;
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: .69rem;
+            font-weight: 700;
+        }
+
+        .document-download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            min-height: 36px;
+            padding: 8px 11px;
+            border-radius: 10px;
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--red), var(--wine));
+            box-shadow: 0 7px 14px rgba(215, 25, 32, .18);
+            font-size: .71rem;
+            font-weight: 800;
+            line-height: 1;
+            white-space: nowrap;
+            transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+        }
+
+        .document-download-btn:hover,
+        .document-download-btn:focus-visible {
+            color: #ffffff;
+            box-shadow: 0 10px 18px rgba(215, 25, 32, .24);
+            filter: brightness(.98);
+            outline: none;
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 480px) {
+            .document-card {
+                align-items: flex-start;
+                flex-wrap: wrap;
+            }
+
+            .document-download-btn {
+                width: calc(100% - 52px);
+                margin-left: 52px;
+            }
+        }
+
+
+        /* ===== KARTU TEMPLATE WORD DI DALAM CHAT ===== */
+        .document-card.document-card-template {
+            border-color: rgba(41, 119, 187, .16);
+            background: linear-gradient(135deg, #f8fbff, #ffffff);
+        }
+
+        .document-card.document-card-template .document-card-icon {
+            color: #216eb1;
+            background: #e7f2ff;
+        }
+
+        .document-card.document-card-template .document-download-btn {
+            background: linear-gradient(135deg, #2977bb, #174f82);
+            box-shadow: 0 7px 14px rgba(41, 119, 187, .18);
+        }
+
+        .document-card.document-card-template .document-download-btn:hover,
+        .document-card.document-card-template .document-download-btn:focus-visible {
+            box-shadow: 0 10px 18px rgba(41, 119, 187, .25);
+        }
+
     </style>
 </head>
 
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-custom">
+    <nav class="main-nav navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="/"><i class="fa-solid fa-graduation-cap me-2"></i>SSC Smart Internship</a>
-            <button class="navbar-collapse collapse navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNav">
-                <i class="fa-solid fa-bars text-danger"></i>
+            <a class="navbar-brand" href="/">
+                <span class="brand-mark">
+                    <img src="{{ url_for('static', filename='images/logotelkom.jpg') }}"
+                        alt="Logo Telkom University">
+                </span>
+                <span>
+                    <span class="ssc-brand-name">
+                        <span class="ssc-s1">S</span>tudent
+                        <span class="ssc-s2">S</span>ervice
+                        <span class="ssc-c">C</span>enter
+                    </span>
+                    <span class="brand-subtitle">Telkom University Surabaya</span>
+                </span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Buka navigasi">
+                <i class="fa-solid fa-bars-staggered fs-5 text-danger"></i>
             </button>
+
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-center">
-                    <li class="nav-item"><a class="nav-link px-3" href="/">Beranda</a></li>
-                    <li class="nav-item"><a class="nav-link active px-3" href="/chat">Tanya Asisten</a></li>
+                <ul class="navbar-nav align-items-lg-center gap-lg-1">
+                    <li class="nav-item"><a class="nav-link" href="/">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/chat">Tanya Asisten</a></li>
                     <li class="nav-item ms-lg-2">
-                        <a class="btn btn-sm btn-outline-danger rounded-pill px-4 shadow-sm" href="/workspace">
-                            <i class="fa-solid fa-lock me-1"></i> Workspace
+                        <a class="nav-link nav-admin" href="/admin/login">
+                            <i class="fa-solid fa-lock me-2"></i>Admin Workspace
                         </a>
                     </li>
                 </ul>
@@ -328,130 +1646,774 @@
         </div>
     </nav>
 
-    <div class="chat-wrapper">
-        <div class="chat-card">
-            
-            <div class="chat-header">
-                <div class="ai-avatar-header">
-                    <i class="fa-solid fa-robot"></i>
-                </div>
-                <div>
-                    <h5 class="mb-0 fw-bold">Asisten Virtual SSC</h5>
-                    <small class="opacity-75"><i class="fa-solid fa-circle text-success me-1" style="font-size: 8px;"></i>Online | Siap Membantu</small>
-                </div>
-            </div>
+    <main class="chat-page">
+        <div class="container">
+            <section class="chat-shell" aria-label="Ruang percakapan Student Service Center">
+                <div class="chat-layout">
+                    <aside class="chat-sidebar">
+                        <div class="sidebar-brand">
+                            <div class="sidebar-brand-icon"><i class="fa-solid fa-comments"></i></div>
+                            <div>
+                                <h6>Riwayat Obrolan</h6>
+                                <p>Kelola percakapanmu</p>
+                            </div>
+                        </div>
 
-            <div class="chat-body" id="chatBox">
-                <div class="msg-row bot">
-                    <div class="avatar-sm avatar-bot"><i class="fa-solid fa-robot"></i></div>
-                    <div class="msg-bubble">
-                        Halo Rek! Selamat datang di <strong>SSC Smart Internship</strong> Telkom University Surabaya. Ada yang bisa saya bantu terkait pelaksanaan atau aturan Kerja Praktik hari ini?
+                        <button class="btn-new-chat" type="button" id="newChatBtn">
+                            <i class="fa-solid fa-pen-to-square"></i>Obrolan Baru
+                        </button>
+
+                        <div class="sidebar-kicker" id="historyKicker">
+                            <span>Obrolan sebelumnya</span>
+                            <span class="sidebar-count" id="historyCount">0</span>
+                        </div>
+
+                        <div class="history-list" id="historyList" aria-label="Riwayat obrolan"></div>
+
+                        <div class="sidebar-footnote">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            <span>Riwayat tersimpan di browser ini agar kamu bisa melanjutkan percakapan sebelumnya.</span>
+                        </div>
+                    </aside>
+
+                    <div class="chat-main">
+                        <header class="chat-header">
+                            <div class="assistant-profile">
+                                <div class="assistant-avatar"><i class="fa-solid fa-robot"></i></div>
+                                <div>
+                                    <h4>Student Service Center</h4>
+                                    <p><span class="online-dot"></span>Online</p>
+                                </div>
+                            </div>
+
+                           
+                        </header>
+
+                        <div class="chat-body" id="chatBox" aria-live="polite"></div>
+
+                        <footer class="chat-footer">
+                            <div class="input-shell">
+                                <i class="fa-solid fa-message"></i>
+                                <input type="text" id="userInput" placeholder="Apa yang ingin kamu tanyakan?"
+                                    autocomplete="off" aria-label="Tulis pertanyaan untuk Student Service Center">
+                                <button class="btn-send" type="button" id="sendBtn" aria-label="Kirim pesan">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                            </div>
+                            <div class="input-helper">
+                                <i class="fa-solid fa-circle-check"></i>
+                                Sampaikan pertanyaanmu, saya siap membantu.
+                            </div>
+                        </footer>
                     </div>
                 </div>
-            </div>
-
-            <div class="chat-footer">
-                <div class="input-group-custom">
-                    <input type="text" id="userInput" class="form-control" placeholder="Tanyakan seputar kerja praktik..." onkeypress="handleKeyPress(event)" autocomplete="off">
-                    <button class="btn-send" type="button" id="sendBtn" onclick="sendMessage()">
-                        <i class="fa-solid fa-paper-plane"></i>
-                    </button>
-                </div>
-            </div>
-
+            </section>
         </div>
-    </div>
+    </main>
 
-    <a href="https://wa.me/6281234567890" target="_blank" class="fab-wa">
+    <!-- Ganti nomor WhatsApp berikut dengan nomor layanan SSC yang sebenarnya. -->
+    <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="fab-wa" aria-label="Hubungi bantuan manusia melalui WhatsApp">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <div class="delete-confirm-modal" id="deleteConfirmModal" aria-hidden="true">
+        <section class="delete-confirm-dialog" role="dialog" aria-modal="true"
+            aria-labelledby="deleteConfirmTitle" aria-describedby="deleteConfirmDescription">
+            <button class="delete-confirm-close" type="button" id="deleteConfirmClose"
+                aria-label="Tutup konfirmasi">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="delete-confirm-icon"><i class="fa-solid fa-trash-can"></i></div>
+            <h5 id="deleteConfirmTitle">Hapus obrolan?</h5>
+            <p id="deleteConfirmDescription">
+                Riwayat ini akan dihapus dari browser ini dan tidak dapat dikembalikan.
+                <span class="delete-confirm-topic" id="deleteConfirmTopic"></span>
+            </p>
+
+            <div class="delete-confirm-actions">
+                <button class="btn-delete-cancel" type="button" id="deleteConfirmCancel">Batal</button>
+                <button class="btn-delete-confirm" type="button" id="deleteConfirmButton">
+                    <i class="fa-solid fa-trash-can me-2"></i>Hapus obrolan
+                </button>
+            </div>
+        </section>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
+        const chatBox = document.getElementById("chatBox");
+        const inputField = document.getElementById("userInput");
+        const sendButton = document.getElementById("sendBtn");
+        const newChatButton = document.getElementById("newChatBtn");
+        const historyList = document.getElementById("historyList");
+        const historyCount = document.getElementById("historyCount");
+        const historyKicker = document.getElementById("historyKicker");
+        const deleteConfirmModal = document.getElementById("deleteConfirmModal");
+        const deleteConfirmTopic = document.getElementById("deleteConfirmTopic");
+        const deleteConfirmClose = document.getElementById("deleteConfirmClose");
+        const deleteConfirmCancel = document.getElementById("deleteConfirmCancel");
+        const deleteConfirmButton = document.getElementById("deleteConfirmButton");
+
+        const STORAGE_KEY = "ssc_student_service_center_chat_history_v3";
+        const ACTIVE_CHAT_KEY = "ssc_student_service_center_active_chat_v3";
+        const MAX_CONVERSATIONS = 30;
+        const DRAFT_TITLE = "Topik Baru";
+        const WELCOME_MESSAGE = "Halo! Ada yang bisa saya bantu hari ini? Silakan tulis pertanyaan atau kebutuhanmu dengan santai, lalu saya akan membantu memberikan arahan yang sesuai.";
+
+        let conversations = loadConversations();
+        let activeConversationId = localStorage.getItem(ACTIVE_CHAT_KEY) || "";
+        let isSending = false;
+        let pendingDeleteConversationId = "";
+
+        function escapeHtml(text) {
+            const element = document.createElement("div");
+            element.textContent = String(text ?? "");
+            return element.innerHTML;
+        }
+
+        function formatBotResponse(text) {
+            const escapedText = escapeHtml(text);
+            const withLinks = escapedText.replace(
+                /(https?:\/\/[^\s<]+)/g,
+                (fullUrl) => {
+                    const cleanUrl = fullUrl.replace(/[.,!?;:]+$/, "");
+                    const trailing = fullUrl.slice(cleanUrl.length);
+                    return `<a class="chat-link" href="${cleanUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i>${cleanUrl}</a>${trailing}`;
+                }
+            );
+            return withLinks.replace(/\n/g, "<br>");
+        }
+
+        function getCurrentTime() {
+            return new Intl.DateTimeFormat("id-ID", {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false
+            }).format(new Date());
+        }
+
+        function getDateLabel() {
+            return new Intl.DateTimeFormat("id-ID", {
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            }).format(new Date());
+        }
+
+        function generateConversationId() {
+            if (window.crypto && typeof window.crypto.randomUUID === "function") {
+                return `chat_${window.crypto.randomUUID()}`;
             }
+            return `chat_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+        }
+
+        function normalizeText(text) {
+            return String(text || "")
+                .toLowerCase()
+                .replace(/[^a-z0-9\s]/g, " ")
+                .replace(/\s+/g, " ")
+                .trim();
+        }
+
+        function titleCase(text) {
+            return String(text || "")
+                .toLowerCase()
+                .replace(/\b\w/g, (character) => character.toUpperCase());
+        }
+
+        function createTopicTitle(message) {
+            const raw = String(message || "").replace(/\s+/g, " ").trim();
+            const normalized = normalizeText(raw);
+
+            if (!raw) return DRAFT_TITLE;
+
+            if (/^(halo|hai|hi|pagi|siang|sore|malam)\b/.test(normalized)) {
+                return "Percakapan Awal";
+            }
+
+            const ignoredWords = new Set([
+                "saya", "aku", "ingin", "mau", "minta", "tolong", "boleh", "apakah",
+                "bagaimana", "untuk", "tentang", "yang", "dan", "atau", "dengan",
+                "bisa", "dapat", "kah", "ya", "dong", "nih", "itu", "ini", "ada",
+                "informasi", "layanan", "student", "service", "center", "ssc",
+                "bantuan", "bantu", "butuh", "mengenai", "seputar"
+            ]);
+
+            const meaningfulWords = raw
+                .replace(/[?!.,:;()[\]{}]/g, " ")
+                .split(/\s+/)
+                .filter((word) => word && !ignoredWords.has(word.toLowerCase()))
+                .slice(0, 5);
+
+            const title = titleCase(meaningfulWords.join(" ").trim());
+            return title || "Topik Percakapan";
+        }
+
+        function hasUserMessage(conversation) {
+            return Boolean(
+                conversation?.messages?.some(
+                    (message) => message?.role === "user" && String(message.text || "").trim()
+                )
+            );
+        }
+
+        function getFirstUserMessage(conversation) {
+            return conversation?.messages?.find(
+                (message) => message?.role === "user" && String(message.text || "").trim()
+            );
+        }
+
+        function normalizeConversation(conversation) {
+            const now = new Date().toISOString();
+            const messages = Array.isArray(conversation?.messages)
+                ? conversation.messages
+                    .filter(
+                        (message) => message && ["user", "bot"].includes(message.role)
+                    )
+                    .map((message) => ({
+                        role: message.role,
+                        text: String(message.text || ""),
+                        time: String(message.time || ""),
+                        attachments: Array.isArray(message.attachments)
+                            ? message.attachments
+                                .filter((attachment) => attachment && typeof attachment === "object")
+                                .map((attachment) => ({
+                                    title: String(attachment.title || "Dokumen SSC"),
+                                    category: String(attachment.category || "Student Service Center"),
+                                    file_type: String(attachment.file_type || "PDF"),
+                                    attachment_type: String(attachment.attachment_type || "pedoman"),
+                                    download_label: String(attachment.download_label || ""),
+                                    download_url: String(attachment.download_url || "")
+                                }))
+                            : []
+                    }))
+                : [];
+
+            const normalizedConversation = {
+                id: typeof conversation?.id === "string" && conversation.id
+                    ? conversation.id
+                    : generateConversationId(),
+                title: String(conversation?.title || "").trim(),
+                createdAt: conversation?.createdAt || now,
+                updatedAt: conversation?.updatedAt || now,
+                messages: messages.length
+                    ? messages
+                    : [{ role: "bot", text: WELCOME_MESSAGE, time: getCurrentTime(), attachments: [] }]
+            };
+
+            const firstUserMessage = getFirstUserMessage(normalizedConversation);
+
+            if (firstUserMessage) {
+                normalizedConversation.title = createTopicTitle(firstUserMessage.text);
+            } else {
+                normalizedConversation.title = DRAFT_TITLE;
+            }
+
+            return normalizedConversation;
+        }
+
+        function loadConversations() {
+            try {
+                const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+
+                if (!Array.isArray(savedData)) return [];
+
+                return savedData
+                    .filter((item) => item && typeof item.id === "string")
+                    .map(normalizeConversation);
+            } catch (error) {
+                return [];
+            }
+        }
+
+        function saveConversations() {
+            conversations = conversations
+                .sort((first, second) => new Date(second.updatedAt) - new Date(first.updatedAt))
+                .slice(0, MAX_CONVERSATIONS);
+
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(conversations));
+            localStorage.setItem(ACTIVE_CHAT_KEY, activeConversationId);
+        }
+
+        function createConversation() {
+            const now = new Date().toISOString();
+            const conversation = {
+                id: generateConversationId(),
+                title: DRAFT_TITLE,
+                createdAt: now,
+                updatedAt: now,
+                messages: [{ role: "bot", text: WELCOME_MESSAGE, time: getCurrentTime() }]
+            };
+
+            conversations.unshift(conversation);
+            activeConversationId = conversation.id;
+            saveConversations();
+            return conversation;
+        }
+
+        function getActiveConversation() {
+            return conversations.find((conversation) => conversation.id === activeConversationId);
+        }
+
+        function getDraftConversation() {
+            return conversations.find((conversation) => !hasUserMessage(conversation));
+        }
+
+        function ensureActiveConversation(createWhenMissing = false) {
+            const activeConversation = getActiveConversation();
+
+            if (activeConversation) return activeConversation;
+
+            const existingDraft = getDraftConversation();
+            if (existingDraft) {
+                activeConversationId = existingDraft.id;
+                saveConversations();
+                return existingDraft;
+            }
+
+            // Saat halaman pertama dibuka, tidak ada tab yang dibuat otomatis.
+            // Tab baru hanya dibuat setelah tombol Obrolan Baru ditekan atau
+            // ketika pengguna benar-benar mengirim pertanyaan pertamanya.
+            if (!createWhenMissing) {
+                return null;
+            }
+
+            return createConversation();
+        }
+
+        function getHistoryTime(updatedAt) {
+            const date = new Date(updatedAt);
+            if (Number.isNaN(date.getTime())) return "Baru saja";
+
+            const today = new Date();
+            const sameDay = date.getDate() === today.getDate()
+                && date.getMonth() === today.getMonth()
+                && date.getFullYear() === today.getFullYear();
+
+            return sameDay
+                ? new Intl.DateTimeFormat("id-ID", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false
+                }).format(date)
+                : new Intl.DateTimeFormat("id-ID", {
+                    day: "numeric",
+                    month: "short"
+                }).format(date);
+        }
+
+        function scrollToLatest() {
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function renderHistory() {
+            const ordered = [...conversations]
+                .sort((first, second) => new Date(second.updatedAt) - new Date(first.updatedAt));
+
+            const hasConversation = ordered.length > 0;
+            historyCount.textContent = ordered.length;
+            historyKicker.classList.toggle("is-hidden", !hasConversation);
+            historyList.classList.toggle("is-empty", !hasConversation);
+
+            if (!hasConversation) {
+                historyList.innerHTML = `
+                    <div class="empty-history">
+                        <div class="empty-history-icon"><i class="fa-regular fa-comment-dots"></i></div>
+                        <strong>Belum ada obrolan</strong>
+                        <span>Tekan Obrolan Baru atau kirim pertanyaan untuk mulai.</span>
+                    </div>`;
+                return;
+            }
+
+            historyList.innerHTML = ordered.map((conversation, index) => {
+                const isActive = conversation.id === activeConversationId;
+                const isDraft = !hasUserMessage(conversation);
+                const toneClass = `history-tone-${index % 5}`;
+
+                return `
+                    <button class="history-item ${toneClass} ${isActive ? "active" : ""} ${isDraft ? "draft" : ""}"
+                        type="button" data-conversation-id="${conversation.id}">
+                        <span class="history-icon"><i class="fa-regular fa-message"></i></span>
+                        <span class="history-text">
+                            <span class="history-title">${escapeHtml(conversation.title || DRAFT_TITLE)}</span>
+                            <span class="history-time">${escapeHtml(
+                                isDraft ? "Siap untuk topik baru" : getHistoryTime(conversation.updatedAt)
+                            )}</span>
+                        </span>
+                        <span class="history-delete" role="button" data-delete-id="${conversation.id}" title="Hapus obrolan">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </span>
+                    </button>`;
+            }).join("");
+        }
+
+        function getSafeDownloadUrl(url) {
+            const value = String(url || "").trim();
+
+            // Backend hanya boleh mengirim endpoint unduhan internal SSC.
+            // PDF memakai /download/pedoman/... dan template Word memakai
+            // /download/template/...
+            if (
+                value.startsWith("/download/pedoman/")
+                || value.startsWith("/download/template/")
+            ) {
+                return value;
+            }
+
+            return "";
+        }
+
+        function renderDocumentCards(attachments) {
+            if (!Array.isArray(attachments) || attachments.length === 0) {
+                return "";
+            }
+
+            return attachments.map((document) => {
+                const title = escapeHtml(document?.title || "Dokumen SSC");
+                const category = escapeHtml(
+                    document?.category || "Student Service Center"
+                );
+                const rawFileType = String(document?.file_type || "PDF").toUpperCase();
+                const attachmentType = String(
+                    document?.attachment_type || "pedoman"
+                ).toLowerCase();
+                const isTemplate = attachmentType === "template" || rawFileType === "DOCX";
+                const fileType = escapeHtml(rawFileType);
+                const downloadUrl = getSafeDownloadUrl(document?.download_url);
+
+                const cardClass = isTemplate
+                    ? "document-card document-card-template"
+                    : "document-card";
+                const iconClass = isTemplate
+                    ? "fa-solid fa-file-word"
+                    : "fa-solid fa-file-pdf";
+                const downloadLabel = escapeHtml(
+                    document?.download_label
+                    || (isTemplate ? "Unduh Template Word" : "Unduh PDF")
+                );
+
+                // Bila URL tidak valid, kartu tidak dirender agar aman.
+                if (!downloadUrl) {
+                    return "";
+                }
+
+                return `
+                    <div class="${cardClass}">
+                        <div class="document-card-icon">
+                            <i class="${iconClass}"></i>
+                        </div>
+                        <div class="document-card-content">
+                            <span class="document-card-title">${title}</span>
+                            <span class="document-card-meta">${category} · ${fileType}</span>
+                        </div>
+                        <a class="document-download-btn"
+                            href="${escapeHtml(downloadUrl)}"
+                            download
+                            aria-label="${downloadLabel}: ${title}">
+                            <i class="fa-solid fa-download"></i>
+                            ${downloadLabel}
+                        </a>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        function buildMessageHtml(message) {
+            const isUser = message.role === "user";
+            const iconClass = isUser ? "avatar-user" : "avatar-bot";
+            const icon = isUser ? "fa-user" : "fa-robot";
+            const bubble = isUser ? escapeHtml(message.text) : formatBotResponse(message.text);
+            const attachmentHtml = isUser
+                ? ""
+                : renderDocumentCards(message.attachments);
+            const meta = isUser
+                ? escapeHtml(message.time || "")
+                : `Student Service Center · ${escapeHtml(message.time || "")}`;
+
+            return `
+                <div class="msg-row ${isUser ? "user" : "bot"}">
+                    <div class="avatar-sm ${iconClass}"><i class="fa-solid ${icon}"></i></div>
+                    <div class="message-stack">
+                        <div class="msg-bubble">${bubble}</div>
+                        ${attachmentHtml}
+                        <div class="message-time">${meta}</div>
+                    </div>
+                </div>`;
+        }
+
+        function renderConversation() {
+            const conversation = ensureActiveConversation(false);
+
+            if (!conversation) {
+                chatBox.innerHTML = `
+                    <div class="date-divider">${escapeHtml(getDateLabel())}</div>
+                    <div class="msg-row bot">
+                        <div class="avatar-sm avatar-bot"><i class="fa-solid fa-robot"></i></div>
+                        <div class="message-stack">
+                            <div class="msg-bubble">${escapeHtml(WELCOME_MESSAGE)}</div>
+                            <div class="message-time">Student Service Center</div>
+                        </div>
+                    </div>`;
+                renderHistory();
+                scrollToLatest();
+                return;
+            }
+
+            chatBox.innerHTML = `
+                <div class="date-divider">${escapeHtml(getDateLabel())}</div>
+                ${conversation.messages.map(buildMessageHtml).join("")}
+            `;
+            renderHistory();
+            scrollToLatest();
+        }
+
+        function appendMessage(role, text, attachments = []) {
+            const conversation = ensureActiveConversation(true);
+            const message = {
+                role,
+                text: String(text || ""),
+                time: getCurrentTime(),
+                attachments: Array.isArray(attachments) ? attachments : []
+            };
+
+            conversation.messages.push(message);
+            conversation.updatedAt = new Date().toISOString();
+
+            if (role === "user") {
+                const firstUserMessage = getFirstUserMessage(conversation);
+                if (firstUserMessage?.text === message.text) {
+                    conversation.title = createTopicTitle(message.text);
+                }
+            }
+
+            chatBox.insertAdjacentHTML("beforeend", buildMessageHtml(message));
+            saveConversations();
+            renderHistory();
+            scrollToLatest();
+        }
+
+        function addTypingIndicator() {
+            const loadingId = `loading-${Date.now()}`;
+            chatBox.insertAdjacentHTML("beforeend", `
+                <div class="msg-row bot" id="${loadingId}">
+                    <div class="avatar-sm avatar-bot"><i class="fa-solid fa-robot"></i></div>
+                    <div class="message-stack">
+                        <div class="msg-bubble">
+                            <div class="typing-indicator">
+                                <span class="typing-text">SSC sedang mengetik</span>
+                                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>`);
+            scrollToLatest();
+            return loadingId;
+        }
+
+        function openConversation(conversationId) {
+            if (isSending || conversationId === activeConversationId) return;
+            if (!conversations.some((conversation) => conversation.id === conversationId)) return;
+
+            activeConversationId = conversationId;
+            saveConversations();
+            renderConversation();
+            inputField.focus();
+        }
+
+        function startNewConversation() {
+            if (isSending) return;
+
+            const activeConversation = ensureActiveConversation(false);
+
+            // Saat belum ada percakapan, tombol ini baru membuat tab pertama.
+            if (!activeConversation) {
+                createConversation();
+                renderConversation();
+                inputField.focus();
+                return;
+            }
+
+            // Jangan membuat tab kedua bila tab aktif belum memiliki pertanyaan dari pengguna.
+            if (!hasUserMessage(activeConversation)) {
+                inputField.focus();
+                renderHistory();
+                return;
+            }
+
+            // Hanya satu tab kosong yang boleh ada pada saat bersamaan.
+            const existingDraft = getDraftConversation();
+
+            if (existingDraft) {
+                activeConversationId = existingDraft.id;
+                saveConversations();
+                renderConversation();
+                inputField.focus();
+                return;
+            }
+
+            createConversation();
+            renderConversation();
+            inputField.focus();
+        }
+
+        function openDeleteConfirmation(conversationId) {
+            if (isSending) return;
+
+            const selected = conversations.find((conversation) => conversation.id === conversationId);
+            if (!selected) return;
+
+            pendingDeleteConversationId = conversationId;
+            const selectedTitle = selected.title || DRAFT_TITLE;
+
+            deleteConfirmTopic.textContent = `“${selectedTitle}”`;
+            deleteConfirmModal.classList.add("is-visible");
+            deleteConfirmModal.setAttribute("aria-hidden", "false");
+            document.body.classList.add("delete-modal-open");
+
+            window.setTimeout(() => deleteConfirmButton.focus(), 30);
+        }
+
+        function closeDeleteConfirmation() {
+            pendingDeleteConversationId = "";
+            deleteConfirmModal.classList.remove("is-visible");
+            deleteConfirmModal.setAttribute("aria-hidden", "true");
+            document.body.classList.remove("delete-modal-open");
+        }
+
+        function confirmDeleteConversation() {
+            if (isSending || !pendingDeleteConversationId) {
+                closeDeleteConfirmation();
+                return;
+            }
+
+            const conversationId = pendingDeleteConversationId;
+            const exists = conversations.some((conversation) => conversation.id === conversationId);
+
+            if (!exists) {
+                closeDeleteConfirmation();
+                return;
+            }
+
+            conversations = conversations.filter((conversation) => conversation.id !== conversationId);
+
+            if (conversationId === activeConversationId) {
+                const nextConversation = conversations
+                    .sort((first, second) => new Date(second.updatedAt) - new Date(first.updatedAt))[0];
+
+                activeConversationId = nextConversation ? nextConversation.id : "";
+            }
+
+            if (activeConversationId) {
+                saveConversations();
+            } else {
+                localStorage.removeItem(ACTIVE_CHAT_KEY);
+                saveConversations();
+            }
+
+            closeDeleteConfirmation();
+            renderConversation();
         }
 
         async function sendMessage() {
-            const inputField = document.getElementById('userInput');
-            const chatBox = document.getElementById('chatBox');
-            const sendButton = document.getElementById('sendBtn');
             const messageText = inputField.value.trim();
+            if (!messageText || isSending) return;
 
-            if (!messageText) return;
+            const activeConversation = ensureActiveConversation(true);
+            const conversationId = activeConversation.id;
 
-            const userMsgHtml = `
-                <div class="msg-row user">
-                    <div class="avatar-sm avatar-user"><i class="fa-solid fa-user"></i></div>
-                    <div class="msg-bubble">${messageText}</div>
-                </div>`;
-            chatBox.innerHTML += userMsgHtml;
-            inputField.value = '';
-            chatBox.scrollTop = chatBox.scrollHeight;
-
-            const loadingId = 'loading-' + Date.now();
-            const loadingHtml = `
-                <div class="msg-row bot" id="${loadingId}">
-                    <div class="avatar-sm avatar-bot"><i class="fa-solid fa-robot"></i></div>
-                    <div class="msg-bubble">
-                        <div class="typing-indicator">
-                            <span class="text-muted small fw-semibold me-2">Mengetik</span>
-                            <div class="dot"></div>
-                            <div class="dot"></div>
-                            <div class="dot"></div>
-                        </div>
-                    </div>
-                </div>`;
-            chatBox.innerHTML += loadingHtml;
-            chatBox.scrollTop = chatBox.scrollHeight;
-
+            isSending = true;
             inputField.disabled = true;
             sendButton.disabled = true;
+            newChatButton.disabled = true;
+
+            appendMessage("user", messageText);
+            inputField.value = "";
+            const loadingId = addTypingIndicator();
 
             try {
-                const response = await fetch('/api/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: messageText })
+                const response = await fetch("/api/chat", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        message: messageText,
+                        conversation_id: conversationId
+                    })
                 });
 
-                const data = await response.json();
-                document.getElementById(loadingId).remove();
+                const data = await response.json().catch(() => ({}));
+                document.getElementById(loadingId)?.remove();
 
-                if (response.ok) {
-                    const formattedResponse = data.response.replace(/\n/g, '<br>');
-                    const botMsgHtml = `
-                        <div class="msg-row bot">
-                            <div class="avatar-sm avatar-bot"><i class="fa-solid fa-robot"></i></div>
-                            <div class="msg-bubble">${formattedResponse}</div>
-                        </div>`;
-                    chatBox.innerHTML += botMsgHtml;
+                if (response.ok && data.response) {
+                    appendMessage(
+                        "bot",
+                        data.response,
+                        data.attachments || []
+                    );
                 } else {
-                    const errorMsgHtml = `
-                        <div class="msg-row bot">
-                            <div class="avatar-sm avatar-bot"><i class="fa-solid fa-robot"></i></div>
-                            <div class="msg-bubble text-danger"><strong>Sistem Eror:</strong> ${data.error || 'Gagal memproses pesan.'}</div>
-                        </div>`;
-                    chatBox.innerHTML += errorMsgHtml;
+                    appendMessage(
+                        "bot",
+                        data.error || "Sistem belum dapat memproses pesan ini. Silakan coba lagi."
+                    );
                 }
             } catch (error) {
-                document.getElementById(loadingId).remove();
-                const errorNetworkHtml = `
-                    <div class="msg-row bot">
-                        <div class="avatar-sm avatar-bot"><i class="fa-solid fa-robot"></i></div>
-                        <div class="msg-bubble text-danger">Maaf, terjadi kesalahan koneksi jaringan. Silakan coba lagi.</div>
-                    </div>`;
-                chatBox.innerHTML += errorNetworkHtml;
+                document.getElementById(loadingId)?.remove();
+                appendMessage(
+                    "bot",
+                    "Koneksi ke sistem sedang bermasalah. Coba kirim pesan lagi beberapa saat."
+                );
+            } finally {
+                isSending = false;
+                inputField.disabled = false;
+                sendButton.disabled = false;
+                newChatButton.disabled = false;
+                inputField.focus();
+                scrollToLatest();
+            }
+        }
+
+        historyList.addEventListener("click", (event) => {
+            const deleteButton = event.target.closest("[data-delete-id]");
+
+            if (deleteButton) {
+                event.stopPropagation();
+                openDeleteConfirmation(deleteButton.dataset.deleteId);
+                return;
             }
 
-            inputField.disabled = false;
-            sendButton.disabled = false;
-            inputField.focus();
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-    </script>
+            const historyItem = event.target.closest("[data-conversation-id]");
+            if (historyItem) openConversation(historyItem.dataset.conversationId);
+        });
+
+        deleteConfirmClose.addEventListener("click", closeDeleteConfirmation);
+        deleteConfirmCancel.addEventListener("click", closeDeleteConfirmation);
+        deleteConfirmButton.addEventListener("click", confirmDeleteConversation);
+
+        deleteConfirmModal.addEventListener("click", (event) => {
+            if (event.target === deleteConfirmModal) {
+                closeDeleteConfirmation();
+            }
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && deleteConfirmModal.classList.contains("is-visible")) {
+                closeDeleteConfirmation();
+            }
+        });
+
+        newChatButton.addEventListener("click", startNewConversation);
+        sendButton.addEventListener("click", sendMessage);
+
+        inputField.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                sendMessage();
+            }
+        });
+
+        renderConversation();    </script>
 </body>
 
 </html>

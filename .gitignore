@@ -1,6 +1,19 @@
+# Virtual environment
 venv/
+
+# Python cache
 __pycache__/
-.env
-uploads/
-vector_store/
 *.pyc
+*.pyo
+
+# Secret configuration
+.env
+
+# Generated system data
+model_cache/
+vector_store/
+learning_data/
+
+# Operating system files
+.DS_Store
+Thumbs.db
